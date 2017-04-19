@@ -1,18 +1,107 @@
 <!DOCTYPE html>
 <html>
-    
+<style>
+
+    #menu
+    {
+        position: fixed;
+        width: 100%;
+        height: 45px;
+        background: white;
+        top: 0px;
+        left: 0px;
+        margin: 0px;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    li {
+        float: right;
+        order:initial;
+
+    }
+
+    li a {
+        font-family: "Arial";
+        font-size: 20px;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        background-color: #111;
+    }
+
+    #logo {
+        font-family:"Impact", Charcoal, sans-serif;
+        display: inline-block;
+        height: inherit;
+        left: 10px;
+        line-height: inherit;
+        margin: 2px;
+        padding: 0;
+        position: absolute;
+        top: 3px;
+        color: white;
+        font-size: 30px;
+        text-transform: none;
+        font-weight: normal;
+        padding: 0px;
+    }
+
+    #logo:hover {
+        color: rgba(229, 71, 75, 0.75);
+    }
+
+
+</style>
+
+
     <head></head>
     
-    <body>SCORE:
+    <body>
+    <nav id="menu" class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+
+                <li id="logo">Dan Gleyzer</li>
+                <li><a class="tablinks" onclick="openCity(event, 'About Me')">Contact Me</a></li>
+                <li><a href="#spa">SPA Q&A</a></li>
+                <li><a href="#qrcoder">QR code</a></li>
+                <li><a href="#like">Like</a></li>
+                <li><a href="#playlist">My Playlist</a></li>
+                <li><a href="#photos">My Photos</a></li>
+                <li><a href="#about">About Me</a></li>
+
+            </ul>
+        </div>
+    </nav>
+    </nav>
+    SCORE:
         <input id="lblScore" type="text" />
         <br/>
         TIME:
         <input id="lblTime" type="text" />
         <br/>
         <canvas id="canvas" height="600" width="600"></canvas>
-		
-		
-        <script type="text/javascript">
+
+    <div id="About Me" class="tabcontent" align="center" >
+
+        <h3>About Me</h3>
+        <p>Hello my name is Nitzan Massad. <br/> I am a student in the Dept. of Software and Information Systems Engineering in Ben-Gurion University of the Negev.</p>
+    </div>
+
+
+    <script type="text/javascript">
             var context = canvas.getContext("2d");
             var shape=new Object();
             var board;
@@ -69,7 +158,7 @@
                 addEventListener("keyup", function (e) {
                     keysDown[e.keyCode] = false;
                 }, false);
-                interval=setInterval(UpdatePosition, 250);
+                interval=setInterval(UpdatePosition, 120);
             }
 
 
@@ -188,6 +277,20 @@
             		Draw();
             	}
             }
+            function openCity(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+
         </script>
     </body>
 
