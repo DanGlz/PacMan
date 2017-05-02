@@ -5,7 +5,10 @@
 <head>
     <link rel="stylesheet" href="css/stylesheet.css">
     <title>Pacman Game</title>
-</head>
+    <script src="jquery-1.10.2.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+        </head>
 
 
 <body>
@@ -25,7 +28,7 @@
 
                         <button class="tablinks" onclick="openTab(event, 'Login')">Login</button>
 
-                        <button class="tablinks" onclick="openTab(event, 'About')">About</button>
+                        <button id = "About" class="tablinks">About</button>
 
                         <button class="tablinks" onclick="openTab(event, 'PacMan')">PacMan</button>
 
@@ -37,8 +40,9 @@
 </aside>
 
 <div id="Welcome" class="tabcontent" align="center" >
-    <h3>Welcome</h3>
-    <p>Welcome</p>
+    <canvas id="myCanvas" height="450" width="900" style="border:0.5px solid">
+        <img src="css/background.jpg" id="bkgdImg" align="center"/>
+    </canvas>
 </div>
 
 <div id="Register" class="tabcontent" align="center">
@@ -60,10 +64,30 @@
     </div>
 </div>
 
-<div id="About" class="tabcontent" align="center">
-    <h3>About</h3>
-    <p>About</p>
+
+<!-- The About Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">x</span>
+            <h2 class="h2">About Us:</h2>
+        </div>
+        <div class="modal-body">
+            <p>J query Plugin??</p><br>
+            <p>Template?</p><br>
+            <p><b>Difficulties?</b><br>
+
+        </div>
+    </div>
 </div>
+
+
+
+
+
+
+
 
 <div id="PacMan" class="tabcontent" align="center">
     SCORE:
