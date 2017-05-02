@@ -9,8 +9,9 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var registered_users = {};
 
-window.addEventListener("load", Start, false);
+
 
 function Start() {
     board = new Array();
@@ -20,10 +21,10 @@ function Start() {
     var food_remain = 50;
     var pacman_remain = 1;
     start_time= new Date();
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 10; i++) { // columns
         board[i] = new Array();
         //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-        for (var j = 0; j < 10; j++) {
+        for (var j = 0; j < 10; j++) { // rows
             if((i==3 && j==3)||(i==3 && j==4)||(i==3 && j==5)||(i==6 && j==1)||(i==6 && j==2))
             {
                 board[i][j] = 4;
@@ -50,7 +51,7 @@ function Start() {
         board[emptyCell[0]][emptyCell[1]] = 1;
         food_remain--;
     }
-    keysDown = {};
+    keysDown = {}; // dictionary
     addEventListener("keydown", function (e) {
         keysDown[e.keyCode] = true;
     }, false);
@@ -175,19 +176,6 @@ function UpdatePosition() {
     {
         Draw();
     }
-}
-function openTab(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
 }
 
 window.addEventListener("load", Start, false);

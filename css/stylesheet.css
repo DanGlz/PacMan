@@ -1,11 +1,13 @@
 
+html{
 
+
+}
 
 body {
     margin: 0;
     padding: 0;
     font-family: "Comic Sans MS", cursive, sans-serif ;
-
 }
 
 header.header{
@@ -56,9 +58,11 @@ div.tab button.active {
 /* Style the tab content */
 .tabcontent {
     display: none;
-    padding: 130px 100px;
+    padding: 10px 10px;
     border: 0px solid transparent;
     border-top: none;
+    height: 100%;
+    width: 100%;
 }
 
 
