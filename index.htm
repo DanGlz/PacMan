@@ -47,8 +47,17 @@
 </div>
 
 <div id="Login" class="tabcontent" align="center">
-    <h3>Login</h3>
-    <p>Login</p>
+    <div class="formholder">
+        <div class="randompad">
+            <fieldset id="log_fields">
+                <label>User Name:</label>
+                <input name="logName" type="text" required />
+                <label>Password:</label>
+                <input name="logPassword" type="password" required />
+                <input type="submit" value="Login" name="logSubmit" onclick="logClick()"/>
+            </fieldset>
+        </div>
+    </div>
 </div>
 
 <div id="About" class="tabcontent" align="center">
@@ -77,9 +86,10 @@ TIME:
 
 </body>
 <!--script-->
-<script src = "js/PacMan.js"></script>
 <script src = "js/index.js"></script>
+<script src = "js/PacMan.js"></script>
 
-</body>
+
+
 
 </html>

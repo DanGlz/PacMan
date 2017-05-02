@@ -22,6 +22,7 @@ div.createdBy{
 
 /* Style the tab */
 div.tab {
+    text-align: center;
     align-content: center;
     vertical-align: center ;
     overflow: hidden;
@@ -64,6 +65,74 @@ div.tab button.active {
     height: 100%;
     width: 100%;
 }
+
+
+
+
+
+
+
+
+
+
+/****login***/
+.formholder {
+    background: #ecf0f1;
+    width: 350px;
+    border-radius: 5px;
+    padding-top: 5px;
+    margin-bottom: 10px;
+}
+.formholder input[type="email"], .formholder input[type="password"], .formholder input[type="name"] , .formholder input[type="text"], .formholder input[type="date"]{
+    padding: 7px 5px;
+    margin: 10px 0;
+    width: 96%;
+    display: block;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    -webkit-transition: 0.3s linear;
+    -moz-transition: 0.3s linear;
+    -o-transition: 0.3s linear;
+    transition: 0.3s linear;
+}
+.formholder input[type="email"]:focus, .formholder input[type="password"]:focus, .formholder input[type="name"]:focus , .formholder input[type="text"]:focus, .formholder input[type="date"]:focus{
+    outline: none;
+    box-shadow: darkgoldenrod  0 0 1px 1px ;
+}
+.formholder input[type="submit"] {
+    background: yellow ;
+    padding: 10px;
+    font-size: 22px;
+    display: block;
+    width: 100%;
+    border: none;
+    color: black;
+    border-radius: 5px;
+    text-align: center;
+}
+.formholder input[type="submit"]:hover {
+    background: greenyellow;
+    text-align: center;
+}
+
+.randompad {
+    padding: 10px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* footer */
