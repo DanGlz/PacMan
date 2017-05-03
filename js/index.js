@@ -16,7 +16,9 @@ function logClick() {
     var password = document.getElementsByName("logPassword")[0].value;
 
     registered_users.a="a";
-   //  registered_users[dan]= "aaa";
+    var dan ="dan";
+    var pass= "12345"
+    registered_users[dan]= pass;
 
         if(registered_users[username]== password) {
             alert("User: " + username + " logged in successfully!" + "\n\nEnjoy ! ")
@@ -35,7 +37,6 @@ function logClick() {
 
 
 /*****About*****/
-
 
 $(document).mouseup(function (e)
 {
