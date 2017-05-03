@@ -12,6 +12,12 @@ var interval;
 var interval2;
 var pacmanDirection = 4;
 var boardOfMonsters ;
+monster1 = new Image() ;
+monster1.src= "images/monster1.png";
+monster2 = new Image() ;
+monster2.src= "images/monster2.png";
+monster3 = new Image() ;
+monster3.src= "images/monster3.png";
 
 
 function Start() {
@@ -59,9 +65,8 @@ function Start() {
     addEventListener("keyup", function (e) {
         keysDown[e.keyCode] = false;
     }, false);
-    setMonsters() ;
+    setMonsters(3) ;
     interval=setInterval(UpdatePosition, 60);
-    interval2 = setInterval(drawMonsters , 1000)''
 }
 
 function setMonsters (numOfMonsters)
@@ -83,14 +88,7 @@ function setMonsters (numOfMonsters)
             }
      }
 }
-function drawMonsters ()
-{
 
-
-
-
-
-}
 function findRandomEmptyCell(board){
     var i = Math.floor((Math.random() * 14) + 1);
     var j = Math.floor((Math.random() * 10) + 1);
@@ -177,8 +175,9 @@ function Draw() {
                 context.fillStyle = "grey"; //color
                 context.fill();
             }
-            if (boardOfMonsters[i][j]==1 ){
-
+            if (boardOfMonsters[i][j]==1 )
+            {
+                context.drawImage(monster2,center.x-20, center.y-20,40,40);
             }
         }
     }
