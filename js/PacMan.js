@@ -9,7 +9,7 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-
+var pacmanDirection = 4;
 
 
 
@@ -17,14 +17,14 @@ function Start() {
     board = new Array();
     score = 0;
     pac_color="yellow";
-    var cnt = 100;
-    var food_remain = 50;
+    var cnt = 165;
+    var food_remain = 120;
     var pacman_remain = 1;
     start_time= new Date();
-    for (var i = 0; i < 10; i++) { // columns
+    for (var i = 0; i < 15; i++) { // columns
         board[i] = new Array();
         //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-        for (var j = 0; j < 10; j++) { // rows
+        for (var j = 0; j < 11; j++) { // rows
             if((i==3 && j==3)||(i==3 && j==4)||(i==3 && j==5)||(i==6 && j==1)||(i==6 && j==2))
             {
                 board[i][j] = 4;// wall
@@ -58,64 +58,95 @@ function Start() {
     addEventListener("keyup", function (e) {
         keysDown[e.keyCode] = false;
     }, false);
-    interval=setInterval(UpdatePosition, 100);
+    interval=setInterval(UpdatePosition, 60);
 }
 
 
 function findRandomEmptyCell(board){
-    var i = Math.floor((Math.random() * 9) + 1);
-    var j = Math.floor((Math.random() * 9) + 1);
+    var i = Math.floor((Math.random() * 14) + 1);
+    var j = Math.floor((Math.random() * 10) + 1);
     while(board[i][j]!=0)
     {
-        i = Math.floor((Math.random() * 9) + 1);
-        j = Math.floor((Math.random() * 9) + 1);
+        i = Math.floor((Math.random() * 14) + 1);
+        j = Math.floor((Math.random() *10) + 1);
     }
     return [i,j];
 }
 
 function GetKeyPressed() {
-    if (keysDown[38]) {
+    if (keysDown[38]) {// up
         return 1;
     }
-    if (keysDown[40]) {
+    if (keysDown[40]) {//down
         return 2;
     }
-    if (keysDown[37]) {
+    if (keysDown[37]) {//left
         return 3;
     }
-    if (keysDown[39]) {
+    if (keysDown[39]) {//right
         return 4;
     }
 }
 
 function Draw() {
     canvas.width=canvas.width; //clean board
+    //canvas.fillStyle= red;
+    //canvas.fillRect(0,0,canvas.width , canvas.height)
     lblScore.value = score;
     lblTime.value = time_elapsed;
-    for (var i = 0; i < 10; i++) {
-        for (var j = 0; j < 10; j++) {
+    var pacmanStartDraw ;
+    var pacmanEndDraw ;
+    var pacmanEyeDrawX ;
+    var pacmanEyeDrawY ;
+
+    if (pacmanDirection == 1 ){ // draw pacman up
+    pacmanStartDraw = 1.65 ;
+    pacmanEndDraw = 1.35 ;
+     pacmanEyeDrawX = -15 ;
+     pacmanEyeDrawY = -5 ;
+    }
+    if (pacmanDirection == 2 ){//draw pacman down
+         pacmanStartDraw = 0.65 ;
+         pacmanEndDraw = 0.35 ;
+         pacmanEyeDrawX = -15 ;
+         pacmanEyeDrawY = 5 ;
+         }
+    if (pacmanDirection == 3 ){//left
+             pacmanStartDraw = 1.15 ;
+             pacmanEndDraw = 0.85 ;
+             pacmanEyeDrawX = -5 ;
+             pacmanEyeDrawY = -15 ;
+    }
+    if (pacmanDirection == 4 ){//right
+         pacmanStartDraw = 0.15 ;
+         pacmanEndDraw = 1.85 ;
+         pacmanEyeDrawX = 5 ;
+         pacmanEyeDrawY = -15 ;
+                          }
+    for (var i = 0; i < 15; i++) {
+        for (var j = 0; j < 11; j++) {
             var center = new Object();
-            center.x = i * 60 + 30; // i column
-            center.y = j * 60 + 30;// j rows
-            if (board[i][j] == 2) {
+            center.x = i * 40 + 20; // i column
+            center.y = j * 40 + 20;// j rows
+            if (board[i][j] == 2) {//pacman
                 context.beginPath();
-                context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+                context.arc(center.x, center.y, 20, pacmanStartDraw * Math.PI, pacmanEndDraw * Math.PI); // half circle
                 context.lineTo(center.x, center.y);
                 context.fillStyle = pac_color; //color
                 context.fill();
                 context.beginPath();
-                context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+                context.arc(center.x+pacmanEyeDrawX, center.y + pacmanEyeDrawY,2 , 0, 2 * Math.PI); // circle eye
                 context.fillStyle = "black"; //color
                 context.fill();
-            } else if (board[i][j] == 1) {
+            } else if (board[i][j] == 1) {// the balls
                 context.beginPath();
-                context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+                context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
                 context.fillStyle = "black"; //color
                 context.fill();
             }
-            else if (board[i][j] == 4) {
+            else if (board[i][j] == 4) {//walls
                 context.beginPath();
-                context.rect(center.x-30, center.y-30, 60, 60);
+                context.rect(center.x-20, center.y-20, 40, 40);
                 context.fillStyle = "grey"; //color
                 context.fill();
             }
@@ -124,7 +155,6 @@ function Draw() {
 
 
 }
-
 function UpdatePosition() {
     board[shape.i][shape.j]=0;
     var x = GetKeyPressed()
@@ -133,13 +163,15 @@ function UpdatePosition() {
         if(shape.j>0 && board[shape.i][shape.j-1]!=4)
         {
             shape.j--;
+            pacmanDirection= x ;
         }
     }
     if(x==2)
     {
-        if(shape.j<9 && board[shape.i][shape.j+1]!=4)
+        if(shape.j<10 && board[shape.i][shape.j+1]!=4)
         {
             shape.j++;
+            pacmanDirection= x ;
         }
     }
     if(x==3)
@@ -147,18 +179,21 @@ function UpdatePosition() {
         if(shape.i>0 && board[shape.i-1][shape.j]!=4)
         {
             shape.i--;
+            pacmanDirection= x ;
         }
     }
     if(x==4)
     {
-        if(shape.i<9 && board[shape.i+1][shape.j]!=4)
+        if(shape.i<14 && board[shape.i+1][shape.j]!=4)
         {
             shape.i++;
+            pacmanDirection= x ;
         }
     }
     if(board[shape.i][shape.j]==1)
     {
         score++;
+
     }
     board[shape.i][shape.j]=2;
     var currentTime=new Date();
@@ -174,6 +209,7 @@ function UpdatePosition() {
     }
     else
     {
+
         Draw();
     }
 }
