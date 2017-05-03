@@ -9,7 +9,7 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-var registered_users = {};
+
 
 
 
@@ -27,20 +27,20 @@ function Start() {
         for (var j = 0; j < 10; j++) { // rows
             if((i==3 && j==3)||(i==3 && j==4)||(i==3 && j==5)||(i==6 && j==1)||(i==6 && j==2))
             {
-                board[i][j] = 4;
+                board[i][j] = 4;// wall
             }
             else{
                 var randomNum = Math.random();
                 if (randomNum <= 1.0 * food_remain / cnt) {
                     food_remain--;
-                    board[i][j] = 1;
+                    board[i][j] = 1; // circles
                 } else if (randomNum < 1.0 * (pacman_remain + food_remain) / cnt) {
                     shape.i=i;
                     shape.j=j;
                     pacman_remain--;
-                    board[i][j] = 2;
+                    board[i][j] = 2; // pacman
                 } else {
-                    board[i][j] = 0;
+                    board[i][j] = 0;  //empty
                 }
                 cnt--;
             }
@@ -95,8 +95,8 @@ function Draw() {
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 10; j++) {
             var center = new Object();
-            center.x = i * 60 + 30;
-            center.y = j * 60 + 30;
+            center.x = i * 60 + 30; // i column
+            center.y = j * 60 + 30;// j rows
             if (board[i][j] == 2) {
                 context.beginPath();
                 context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
