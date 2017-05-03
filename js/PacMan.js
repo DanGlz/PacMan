@@ -9,8 +9,9 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var interval2;
 var pacmanDirection = 4;
-
+var boardOfMonsters ;
 
 
 function Start() {
@@ -58,10 +59,38 @@ function Start() {
     addEventListener("keyup", function (e) {
         keysDown[e.keyCode] = false;
     }, false);
+    setMonsters() ;
     interval=setInterval(UpdatePosition, 60);
+    interval2 = setInterval(drawMonsters , 1000)''
 }
 
+function setMonsters (numOfMonsters)
+    {
+    boardOfMonsters = new Array();
+     for (var i = 0; i < 15; i++) { // columns
+            boardOfMonsters[i] = [];
+            //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
+            for (var j = 0; j < 11; j++) { // rows
 
+                if ( (i==0 && j == 0) || (i==14 && j == 0 && numOfMonsters>1) || (i==0 && j == 10 && numOfMonsters>2))
+                {
+                      boardOfMonsters[i][j] = 1 ;
+                }
+                else
+                {
+                      boardOfMonsters[i][j] = 0 ;
+                }
+            }
+     }
+}
+function drawMonsters ()
+{
+
+
+
+
+
+}
 function findRandomEmptyCell(board){
     var i = Math.floor((Math.random() * 14) + 1);
     var j = Math.floor((Math.random() * 10) + 1);
@@ -90,8 +119,6 @@ function GetKeyPressed() {
 
 function Draw() {
     canvas.width=canvas.width; //clean board
-    //canvas.fillStyle= red;
-    //canvas.fillRect(0,0,canvas.width , canvas.height)
     lblScore.value = score;
     lblTime.value = time_elapsed;
     var pacmanStartDraw ;
@@ -150,6 +177,9 @@ function Draw() {
                 context.fillStyle = "grey"; //color
                 context.fill();
             }
+            if (boardOfMonsters[i][j]==1 ){
+
+            }
         }
     }
 
@@ -205,6 +235,8 @@ function UpdatePosition() {
     if(score==50)
     {
         window.clearInterval(interval);
+        window.clearInterval(interval2);
+
         window.alert("Game completed");
     }
     else
