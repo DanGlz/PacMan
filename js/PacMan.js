@@ -30,8 +30,8 @@ ball_15points= new Image() ;
 ball_15points.src="images/15points.png";
 ball_25points= new Image() ;
 ball_25points.src="images/25points.png";
-//BonusItemImage= new Image() ;
-//BonusItemImage.src="images/bonusItem.jpeg";
+BonusItemImage= new Image() ;
+BonusItemImage.src="images/bonusItem.png";
 
 function Start() {
     board = new Array();
@@ -268,16 +268,10 @@ function Draw() {
             else if (boardOfMonsters[i][j]==3 ){
                 context.drawImage(monster3,center.x-20, center.y-20,40,40);
             }
-            //context.drawImage(BonusItemImage,i * 40 + 20-20, j * 40 + 20-20,40,40);
+            context.drawImage(BonusItemImage,BonusItem.i*40 ,BonusItem.j*40  ,40,40);
 
         }
     }
-    counter ++ ;
-/*    if (counter%10 == 0)
-    {
-        moveBonusItem() ;
-    }
-    */
 }
 function UpdatePosition() {
     board[shape.i][shape.j]=0;
