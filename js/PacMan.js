@@ -35,6 +35,7 @@ BonusItemImage= new Image() ;
 BonusItemImage.src="images/bonusItem.png";
 
 function Start() {
+    LOST=false;
     board = new Array();
     score = 0;
     pac_color="yellow";
