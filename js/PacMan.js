@@ -73,7 +73,7 @@ function Start() {
     }, false);
     setMonsters(3) ;
     interval=setInterval(UpdatePosition, 60);
-    interval2 = setInterval(moveMonsters,100);
+    interval2 = setInterval(moveMonsters,120);
 }
 
 function setMonsters (numOfMonsters)
@@ -128,7 +128,6 @@ var up ;
 var down ;
 var left ;
 var right ;
-var booleanMove = false;
  for (var i = 0; i < 15; i++) { // columns
         for (var j = 0; j < 11; j++) { // rows
 
