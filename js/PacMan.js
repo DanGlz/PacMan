@@ -12,6 +12,11 @@ var interval;
 var interval2;
 var pacmanDirection = 4;
 var boardOfMonsters ;
+var numBalls_5_point ;
+var numBalls_15_point ;
+var numBalls_25_point ;
+
+
 monster1 = new Image() ;
 monster1.src= "images/monster2.png";
 monster2 = new Image() ;
@@ -32,6 +37,9 @@ function Start() {
     pac_color="yellow";
     var cnt = 165;
     var food_remain = 120;
+    numBalls_5_point = Math.floor(food_remain/0.6) ;
+    numBalls_15_point = Math.floor(food_remain/0.3) ;
+    numBalls_25_point = Math.floor(food_remain/0.1) ;
     var pacman_remain = 1;
     start_time= new Date();
     for (var i = 0; i < 15; i++) { // columns
@@ -46,7 +54,7 @@ function Start() {
                 var randomNum = Math.random();
                 if (randomNum <= 1.0 * food_remain / cnt) {
                     food_remain--;
-                    board[i][j] = 1; // circles
+                    board[i][j] = randomBalls(); // circles
                 } else if (randomNum < 1.0 * (pacman_remain + food_remain) / cnt) {
                     shape.i=i;
                     shape.j=j;
@@ -170,7 +178,6 @@ var right ;
  }
 }
 
-
 function Draw() {
     canvas.width=canvas.width; //clean board
     lblScore.value = score;
@@ -219,13 +226,18 @@ function Draw() {
                 context.arc(center.x+pacmanEyeDrawX, center.y + pacmanEyeDrawY,2 , 0, 2 * Math.PI); // circle eye
                 context.fillStyle = "black"; //color
                 context.fill();
-            } else if (board[i][j] == 1) {// the balls
+            } else if (board[i][j] == 1.05)
+            {// the balls 5
                 context.drawImage(ball_5points,center.x-20, center.y-20,30,30);
-                /*context.beginPath();
-                context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
-                context.fillStyle = "black"; //color
-                context.fill();*/
             }
+            else if (board[i][j] == 1.15)
+            {
+                  context.drawImage(ball_15points,center.x-20, center.y-20,30,30);
+            }
+             else if (board[i][j] == 1.25)
+                  {
+                       context.drawImage(ball_25points,center.x-20, center.y-20,30,30);
+                  }
             else if (board[i][j] == 4) {//walls
                 context.beginPath();
                 context.rect(center.x-20, center.y-20, 40, 40);
@@ -308,5 +320,29 @@ function UpdatePosition() {
         Draw();
     }
 }
+
+function randomBalls ()
+{
+    while (true){
+    var randomNum = Math.random();
+    if (randomNum<=0.6 && numBalls_5_point>0 )
+    {
+        return 1.05;
+    }
+    if (randomNum>0.6 && randomNum<=0.9 && numBalls_15_point>0 )
+    {
+            return 1.15;
+    }
+    if (randomNum>0.9 &&  numBalls_25_point>0)
+    {
+        return 1.25 ;
+    }
+    if (numBalls_5_point==0 && numBalls_15_point==0 && numBalls_25_point==0)
+    {
+        return 0 ;
+    }
+    }
+}
+
 
 window.addEventListener("load", Start, false);
