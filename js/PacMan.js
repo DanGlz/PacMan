@@ -36,6 +36,7 @@ BonusItemImage.src="images/bonusItem.png";
 
 function Start() {
     LOST=false;
+    window.clearInterval(interval);
     board = new Array();
     score = 0;
     pac_color="yellow";
@@ -357,7 +358,7 @@ function UpdatePosition() {
         if(score==500)
          message ="We have a Winner!!";
         else
-            message="You Lost";
+            message="You Lost!";
 
         window.alert(message);
     }
