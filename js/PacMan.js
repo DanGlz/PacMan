@@ -18,6 +18,12 @@ monster2 = new Image() ;
 monster2.src= "images/monster6.png";
 monster3 = new Image() ;
 monster3.src= "images/monster4.png";
+ball_5points= new Image() ;
+ball_5points.src="images/5point.png";
+ball_15points= new Image() ;
+ball_15points.src="images/15points.png";
+ball_25points= new Image() ;
+ball_25points.src="images/25points.png";
 
 
 function Start() {
@@ -32,7 +38,7 @@ function Start() {
         board[i] = new Array();
         //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
         for (var j = 0; j < 11; j++) { // rows
-            if((i==3 && j==3)||(i==3 && j==4)||(i==3 && j==5)||(i==6 && j==1)||(i==6 && j==2))
+            if((i==3 && j==3)||(i==3 && j==4)||(i==3 && j==5)||(i==3 && j==5)||(i==6 && j==1)||(i==6 && j==2))
             {
                 board[i][j] = 4;// wall
             }
@@ -180,10 +186,11 @@ function Draw() {
                 context.fillStyle = "black"; //color
                 context.fill();
             } else if (board[i][j] == 1) {// the balls
-                context.beginPath();
+                context.drawImage(ball_5points,center.x-20, center.y-20,30,30);
+                /*context.beginPath();
                 context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
                 context.fillStyle = "black"; //color
-                context.fill();
+                context.fill();*/
             }
             else if (board[i][j] == 4) {//walls
                 context.beginPath();
@@ -201,7 +208,6 @@ function Draw() {
             }
             else if (boardOfMonsters[i][j]==3 ){
                 context.drawImage(monster3,center.x-20, center.y-20,40,40);
-
             }
         }
     }
