@@ -86,7 +86,6 @@ function Start() {
     }, false);
     setMonsters(3) ;
     interval=setInterval(UpdatePosition, 60);
-    interval2 = setInterval(moveMonsters,120);
 }
 
 function setMonsters (numOfMonsters)
@@ -144,42 +143,51 @@ var right ;
  for (var i = 0; i < 15; i++) { // columns
         for (var j = 0; j < 11; j++) { // rows
 
-        if (boardOfMonsters[i][j]>0)
-        {
+        if (boardOfMonsters[i][j]>0) {
+            if (i > 0 && board[i - 1][j] < 2 && boardOfMonsters[i - 1][j] == 0) {
+                left = (Math.abs(i - 1 - shape.i) + Math.abs(j - shape.j))
+            } else {
+                left = 100000
+            }
+            if (i < 14 && board[i + 1][j] < 2 && boardOfMonsters[i + 1][j] == 0) {
+                right = (Math.abs(i + 1 - shape.i) + Math.abs(j - shape.j))
+            } else {
+                right = 100000
+            }
+            if (j < 10 && board[i][j + 1] < 2 && boardOfMonsters[i][j + 1] == 0) {
+                down = (Math.abs(i - shape.i) + Math.abs(j + 1 - shape.j))
+            } else {
+                down = 100000
+            }
+            if (j > 0 && board[i][j - 1] < 2 && boardOfMonsters[i][j - 1] == 0) {
+                up = (Math.abs(i - shape.i) + Math.abs(j - 1 - shape.j))
+            } else {
+                up = 100000
+            }
 
-           if (i>0 && board[i-1][j]<2 && boardOfMonsters[i-1][j]==0)
-                {up = (Math.pow((i-1 -shape.i),2)+ Math.pow((j -shape.j),2))}else {up = 100000}
-           if (i<14 && board[i+1][j]<2 && boardOfMonsters[i+1][j]==0)
-                {down = (Math.pow((i+1 -shape.i),2)+ Math.pow((j -shape.j),2))}else {down = 100000}
-           if (j<10 && board[i][j+1]<2 && boardOfMonsters[i][j+1]==0)
-                {right = (Math.pow((i -shape.i),2)+ Math.pow((j+1 -shape.j),2))}else {right = 100000}
-           if (j>0 && board[i][j-1]<2 && boardOfMonsters[i][j-1]==0)
-                {left = (Math.pow((i -shape.i),2)+ Math.pow((j-1 -shape.j),2))}else {left = 100000}
+            var min = Math.min(up, down, right, left);
 
-            //  window.alert("up :"+ up);
-
-          if (up < down && up < left && up < right)
-          {
-            boardOfMonsters[i-1][j] = boardOfMonsters[i][j] ;
-            boardOfMonsters[i][j] = 0 ;
-          }
-         if (down < up && down < left && down < right)
-         {
-         boardOfMonsters[i+1][j] = boardOfMonsters[i][j] ;
-         boardOfMonsters[i][j] = 0 ;
-         }
-         if (left < down && left <up && left< right)
-         {
-           boardOfMonsters[i][j-1] = boardOfMonsters[i][j] ;
-           boardOfMonsters[i][j] = 0 ;
-         }
-         if (right < down && right < up && right <left)
-         {
-           boardOfMonsters[i][j+1] = boardOfMonsters[i][j] ;
-           boardOfMonsters[i][j] = 0 ;
-         }
+            if (min != 100000) {
+                if (min == left) {
+                    boardOfMonsters[i - 1][j] = boardOfMonsters[i][j];
+                    boardOfMonsters[i][j] = 0;
+                }
+                else if (min == right) {
+                    boardOfMonsters[i + 1][j] = boardOfMonsters[i][j];
+                    boardOfMonsters[i][j] = 0;
+                }
+                else if (min == up) {
+                    boardOfMonsters[i][j - 1] = boardOfMonsters[i][j];
+                    boardOfMonsters[i][j] = 0;
+                }
+                else if (min == down) {
+                    boardOfMonsters[i][j + 1] = boardOfMonsters[i][j];
+                    boardOfMonsters[i][j] = 0;
+                }
+            }
         }
-    }
+        }
+
  }
 }
 
@@ -328,8 +336,6 @@ function UpdatePosition() {
     if(score==500)
     {
         window.clearInterval(interval);
-        window.clearInterval(interval2);
-
         window.alert("Game completed");
     }
     else
