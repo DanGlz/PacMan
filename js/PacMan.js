@@ -44,9 +44,7 @@ function Start() {
     numBalls_25_point = Math.floor(food_remain/0.1) ;
     var pacman_remain = 1;
     start_time= new Date();
-    BonusItem.i = 14 ;
-    BonusItem.j = 10 ;
-   // chooseRandomSpotForBonusItem() ;
+
     for (var i = 0; i < 15; i++) { // columns
         board[i] = new Array();
         //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -85,6 +83,9 @@ function Start() {
         keysDown[e.keyCode] = false;
     }, false);
     setMonsters(3) ;
+     BonusItem.i = 14 ;
+     BonusItem.j = 10 ;
+     chooseRandomSpotForBonusItem() ;
     interval=setInterval(UpdatePosition, 60);
 }
 
@@ -109,12 +110,12 @@ function setMonsters (numOfMonsters)
 }
 
 function findRandomEmptyCell(board){
-    var i = Math.floor((Math.random() * 14) + 1);
-    var j = Math.floor((Math.random() * 10) + 1);
+    var i = Math.floor((Math.random() * 13) + 1);
+    var j = Math.floor((Math.random() * 9) + 1);
     while(board[i][j]!=0)
     {
-        i = Math.floor((Math.random() * 14) + 1);
-        j = Math.floor((Math.random() *10) + 1);
+        i = Math.floor((Math.random() * 13) + 1);
+        j = Math.floor((Math.random() *9) + 1);
     }
     return [i,j];
 }
@@ -335,7 +336,10 @@ function UpdatePosition() {
     else
     {
         if (counter%5 == 0)
+        {
             moveMonsters();
+            moveBonusItem();
+        }
         Draw();
         counter ++ ;
     }
@@ -363,22 +367,84 @@ function randomBalls ()
     }
     }
 }
-/*function moveBonusItem ()
+function moveBonusItem ()
 {
+var up ;
+var down ;
+var left ;
+var right ;
+var i = BonusItem.i ;
+var j = BonusItem.j ;
+var nextI = BonusItem.nextI ;
+var nextJ = BonusItem.nextJ ;
 
- }
- */
-/*function chooseRandomSpotForBonusItem ()
-{
-      var i = Math.floor((Math.random() * 14) + 1);
-      var j = Math.floor((Math.random() * 10) + 1);
-      while(board[i][j]>2)
-      {
-            i = Math.floor((Math.random() * 14) + 1);
-            j = Math.floor((Math.random() *10) + 1);
-      }
-       BonusItem.next_i =i ;
-       BonusItem.next_j =j ;
+
+    if (i==nextI &&j ==nextJ)
+    {
+
+            chooseRandomSpotForBonusItem();
+    }
+
+     if (i > 0 && board[i - 1][j] < 4 )
+     {
+     left = (Math.abs(i - 1 - nextI) + Math.abs(j - nextJ))
+     } else {
+                 left = 100000
+            }
+     if (i < 14 && board[i + 1][j] < 4 )
+     {
+        right = (Math.abs(i + 1 - nextI) + Math.abs(j - nextJ))
+     } else {
+                    right = 100000
+            }
+     if (j < 10 && board[i][j + 1] <4 )
+     {
+                    down = (Math.abs(i - nextI) + Math.abs(j + 1 - nextJ))
+     } else {
+                    down = 100000
+            }
+    if (j > 0 && board[i][j - 1] < 4)
+    {
+            up = (Math.abs(i - nextI) + Math.abs(j - 1 - nextJ))
+    } else {
+                    up = 100000
+           }
+alert ("sdaasda");
+   var min = Math.min(up, down, right, left);
+        if (min == left)
+        {
+            BonusItem.i = i-1 ;
+             BonusItem.j = j ;
+        }
+        else if (min == right)
+        {
+                           BonusItem.i = i+1 ;
+                           BonusItem.j = j ;
+        }
+        else if (min == up)
+         {
+                           BonusItem.i = i ;
+                           BonusItem.j = j-1 ;
+         }
+         else if (min == down)
+         {
+                            BonusItem.i = i ;
+                            BonusItem.j = j+1 ;
+         }
 }
-*/
+
+function chooseRandomSpotForBonusItem ()
+{
+      var i = Math.floor((Math.random() * 13) + 1);
+      var j = Math.floor((Math.random() * 9) + 1);
+      while(board[i][j]>1.5)
+      {
+            i = Math.floor((Math.random() * 13) + 1);
+            j = Math.floor((Math.random() *9) + 1);
+      }
+
+       BonusItem.nextI =i ;
+       BonusItem.nextJ =j ;
+}
+
 window.addEventListener("load", Start, false);
