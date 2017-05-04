@@ -12,8 +12,9 @@ var interval;
 var interval2;
 var pacmanDirection = 4;
 var boardOfMonsters ;
+
 monster1 = new Image() ;
-monster1.src= "images/monster1.png";
+monster1.src= "images/monster4.png";
 monster2 = new Image() ;
 monster2.src= "images/monster2.png";
 monster3 = new Image() ;
@@ -41,7 +42,7 @@ function Start() {
                 if (randomNum <= 1.0 * food_remain / cnt) {
                     food_remain--;
                     board[i][j] = 1; // circles
-                } else if (randomNum < 1.0 * (pacman_remain + food_remain) / cnt) {
+                } else if (randomNum < 1.0 * (pacman_remain + food_remain) / cnt && !((i==0 && j == 0) || (i==14 && j == 0 ) || (i==0 && j == 10 ))) {
                     shape.i=i;
                     shape.j=j;
                     pacman_remain--;
@@ -74,12 +75,19 @@ function setMonsters (numOfMonsters)
     boardOfMonsters = new Array();
      for (var i = 0; i < 15; i++) { // columns
             boardOfMonsters[i] = [];
-            //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
             for (var j = 0; j < 11; j++) { // rows
 
-                if ( (i==0 && j == 0) || (i==14 && j == 0 && numOfMonsters>1) || (i==0 && j == 10 && numOfMonsters>2))
+                if (i==0 && j == 0)
                 {
                       boardOfMonsters[i][j] = 1 ;
+                }
+                else if (i==14 && j == 0 && numOfMonsters>1)
+                {
+                     boardOfMonsters[i][j] = 2 ;
+                }
+                else if (i==0 && j == 10 && numOfMonsters>2)
+                {
+                    boardOfMonsters[i][j] = 3 ;
                 }
                 else
                 {
@@ -114,6 +122,22 @@ function GetKeyPressed() {
         return 4;
     }
 }
+
+function moveMonsters ()
+{
+ for (var i = 0; i < 15; i++) { // columns
+        for (var j = 0; j < 11; j++) { // rows
+
+        if (boardOfMonsters[i][j]>0)
+        {
+
+        }
+
+
+    }
+ }
+}
+
 
 function Draw() {
     canvas.width=canvas.width; //clean board
@@ -175,9 +199,12 @@ function Draw() {
                 context.fillStyle = "grey"; //color
                 context.fill();
             }
-            if (boardOfMonsters[i][j]==1 )
+            if (boardOfMonsters[i][j]>0 )
             {
-                context.drawImage(monster2,center.x-20, center.y-20,40,40);
+                if (boardOfMonsters[i][j]== 1){ context.drawImage(monster1,center.x-20, center.y-20,40,40);}
+                if (boardOfMonsters[i][j]== 2){ context.drawImage(monster2,center.x-20, center.y-20,40,40);}
+                if (boardOfMonsters[i][j]== 3){ context.drawImage(monster3,center.x-20, center.y-20,40,40);}
+
             }
         }
     }
