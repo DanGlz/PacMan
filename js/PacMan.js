@@ -75,7 +75,6 @@ function setMonsters (numOfMonsters)
         var monsterId=1;
      for (var i = 0; i < 15; i++) { // columns
             boardOfMonsters[i] = [];
-            //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
             for (var j = 0; j < 11; j++) { // rows
                 if ( (i==0 && j == 0) || (i==14 && j == 0 && numOfMonsters>1) || (i==0 && j == 10 && numOfMonsters>2))
                 {
@@ -115,6 +114,22 @@ function GetKeyPressed() {
         return 4;
     }
 }
+
+function moveMonsters ()
+{
+ for (var i = 0; i < 15; i++) { // columns
+        for (var j = 0; j < 11; j++) { // rows
+
+        if (boardOfMonsters[i][j]>0)
+        {
+
+        }
+
+
+    }
+ }
+}
+
 
 function Draw() {
     canvas.width=canvas.width; //clean board
