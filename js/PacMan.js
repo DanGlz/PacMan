@@ -3,6 +3,7 @@
  */
 var context = canvas.getContext("2d");
 var shape=new Object();
+var BonusItem=new Object();
 var board;
 var score;
 var pac_color;
@@ -15,7 +16,7 @@ var boardOfMonsters ;
 var numBalls_5_point ;
 var numBalls_15_point ;
 var numBalls_25_point ;
-
+var counter =0;
 
 monster1 = new Image() ;
 monster1.src= "images/monster2.png";
@@ -29,7 +30,8 @@ ball_15points= new Image() ;
 ball_15points.src="images/15points.png";
 ball_25points= new Image() ;
 ball_25points.src="images/25points.png";
-
+BonusItemImage= new Image() ;
+BonusItemImage.src="images/bonusItem.jpeg";
 
 function Start() {
     board = new Array();
@@ -42,6 +44,9 @@ function Start() {
     numBalls_25_point = Math.floor(food_remain/0.1) ;
     var pacman_remain = 1;
     start_time= new Date();
+    BonusItem.i = 14 ;
+    BonusItem.j = 10 ;
+    chooseRandomSpotForBonusItem() ;
     for (var i = 0; i < 15; i++) { // columns
         board[i] = new Array();
         //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -69,7 +74,7 @@ function Start() {
     }
     while(food_remain>0){
         var emptyCell = findRandomEmptyCell(board);
-        board[emptyCell[0]][emptyCell[1]] = 1;
+        board[emptyCell[0]][emptyCell[1]] = randomBalls();
         food_remain--;
     }
     keysDown = {}; // dictionary
@@ -255,10 +260,15 @@ function Draw() {
             else if (boardOfMonsters[i][j]==3 ){
                 context.drawImage(monster3,center.x-20, center.y-20,40,40);
             }
+            context.drawImage(BonusItemImage,i * 40 + 20-20, j * 40 + 20-20,40,40);
+
         }
     }
-
-
+    counter ++ ;
+    if (counter%10 == 0)
+    {
+        moveBonusItem() ;
+    }
 }
 function UpdatePosition() {
     board[shape.i][shape.j]=0;
@@ -350,6 +360,21 @@ function randomBalls ()
     }
     }
 }
+function moveBonusItem ()
+{
 
+ }
+function chooseRandomSpotForBonusItem ()
+{
+      var i = Math.floor((Math.random() * 14) + 1);
+      var j = Math.floor((Math.random() * 10) + 1);
+      while(board[i][j]>2)
+      {
+            i = Math.floor((Math.random() * 14) + 1);
+            j = Math.floor((Math.random() *10) + 1);
+      }
+       BonusItem.next_i =i ;
+       BonusItem.next_j =j ;
+}
 
 window.addEventListener("load", Start, false);
