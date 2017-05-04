@@ -86,6 +86,7 @@ function Start() {
     setMonsters(3) ;
      BonusItem.i = 14 ;
      BonusItem.j = 10 ;
+     BonusItem.draw= true ;
      chooseRandomSpotForBonusItem() ;
     interval=setInterval(UpdatePosition, 60);
 }
@@ -279,8 +280,10 @@ function Draw() {
             else if (boardOfMonsters[i][j]==3 ){
                 context.drawImage(monster3,center.x-20, center.y-20,40,40);
             }
+            if (BonusItem.draw)
+            {
             context.drawImage(BonusItemImage,BonusItem.i*40 ,BonusItem.j*40  ,40,40);
-
+            }
         }
     }
 }
@@ -331,6 +334,11 @@ function UpdatePosition() {
     {
         score+=25;
     }
+    if (shape.i == BonusItem.i && shape.j == BonusItem.j && BonusItem.draw )
+    {
+    BonusItem.draw= false ;
+     score+=50;
+    }
     board[shape.i][shape.j]=2;
     var currentTime=new Date();
     time_elapsed=(currentTime-start_time)/100;
@@ -351,7 +359,7 @@ function UpdatePosition() {
     }
     else
     {
-        if (counter%5 == 0)
+        if (counter%25 == 0)
         {
             moveMonsters();
             moveBonusItem();
