@@ -471,4 +471,4 @@ function chooseRandomSpotForBonusItem ()
        BonusItem.nextJ =j ;
 }
 
-window.addEventListener("load", Start, false);
+//window.addEventListener("load", Start, false);
