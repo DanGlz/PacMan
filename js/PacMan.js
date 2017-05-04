@@ -295,19 +295,26 @@ function UpdatePosition() {
             pacmanDirection= x ;
         }
     }
-    if(board[shape.i][shape.j]==1)
+    if(board[shape.i][shape.j]==1.05)
     {
-        score++;
-
+        score+=5;
+    }
+    if(board[shape.i][shape.j]==1.15)
+    {
+        score+=15;
+    }
+    if(board[shape.i][shape.j]==1.25)
+    {
+        score+=25;
     }
     board[shape.i][shape.j]=2;
     var currentTime=new Date();
-    time_elapsed=(currentTime-start_time)/1000;
+    time_elapsed=(currentTime-start_time)/100;
     if(score>=20&&time_elapsed<=10)
     {
         pac_color="green";
     }
-    if(score==50)
+    if(score==500)
     {
         window.clearInterval(interval);
         window.clearInterval(interval2);
