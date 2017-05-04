@@ -13,11 +13,11 @@ var interval2;
 var pacmanDirection = 4;
 var boardOfMonsters ;
 monster1 = new Image() ;
-monster1.src= "images/monster1.png";
+monster1.src= "images/monster2.png";
 monster2 = new Image() ;
-monster2.src= "images/monster2.png";
+monster2.src= "images/monster6.png";
 monster3 = new Image() ;
-monster3.src= "images/monster3.png";
+monster3.src= "images/monster4.png";
 
 
 function Start() {
@@ -72,14 +72,15 @@ function Start() {
 function setMonsters (numOfMonsters)
     {
     boardOfMonsters = new Array();
+        var monsterId=1;
      for (var i = 0; i < 15; i++) { // columns
             boardOfMonsters[i] = [];
             //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
             for (var j = 0; j < 11; j++) { // rows
-
                 if ( (i==0 && j == 0) || (i==14 && j == 0 && numOfMonsters>1) || (i==0 && j == 10 && numOfMonsters>2))
                 {
-                      boardOfMonsters[i][j] = 1 ;
+                      boardOfMonsters[i][j] = monsterId ;
+                        monsterId++;
                 }
                 else
                 {
@@ -177,7 +178,15 @@ function Draw() {
             }
             if (boardOfMonsters[i][j]==1 )
             {
+                context.drawImage(monster1,center.x-20, center.y-20,40,40);
+            }
+            else if (boardOfMonsters[i][j]==2 )
+            {
                 context.drawImage(monster2,center.x-20, center.y-20,40,40);
+            }
+            else if (boardOfMonsters[i][j]==3 ){
+                context.drawImage(monster3,center.x-20, center.y-20,40,40);
+
             }
         }
     }
