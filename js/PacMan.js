@@ -76,13 +76,6 @@ function Start() {
         board[emptyCell[0]][emptyCell[1]] = randomBalls();
         food_remain--;
     }
-
-
-
-
-
-
-
     keysDown = {}; // dictionary
     addEventListener("keydown", function (e) {
         if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
@@ -290,8 +283,10 @@ function Draw() {
             else if (boardOfMonsters[i][j]==3 ){
                 context.drawImage(monster3,center.x-20, center.y-20,40,40);
             }
+            if (BonusItem.draw)
+            {
             context.drawImage(BonusItemImage,BonusItem.i*40 ,BonusItem.j*40  ,40,40);
-
+            }
         }
     }
 }
