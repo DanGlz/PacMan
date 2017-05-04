@@ -272,12 +272,6 @@ function Draw() {
 
         }
     }
-    counter ++ ;
-/*    if (counter%10 == 0)
-    {
-        moveBonusItem() ;
-    }
-    */
 }
 function UpdatePosition() {
     board[shape.i][shape.j]=0;
@@ -340,8 +334,10 @@ function UpdatePosition() {
     }
     else
     {
-
+        if (counter%5 == 0)
+            moveMonsters();
         Draw();
+        counter ++ ;
     }
 }
 
