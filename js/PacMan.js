@@ -425,7 +425,7 @@ var nextJ = BonusItem.nextJ ;
     } else {
                     up = 100000
            }
-alert ("sdaasda");
+
    var min = Math.min(up, down, right, left);
         if (min == left)
         {
