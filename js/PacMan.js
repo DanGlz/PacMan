@@ -17,6 +17,7 @@ var numBalls_5_point ;
 var numBalls_15_point ;
 var numBalls_25_point ;
 var counter =0;
+var LOST = false;
 
 monster1 = new Image() ;
 monster1.src= "images/monster2.png";
@@ -140,26 +141,27 @@ var up ;
 var down ;
 var left ;
 var right ;
+var moved ={};
  for (var i = 0; i < 15; i++) { // columns
         for (var j = 0; j < 11; j++) { // rows
 
         if (boardOfMonsters[i][j]>0) {
-            if (i > 0 && board[i - 1][j] < 2 && boardOfMonsters[i - 1][j] == 0) {
+            if (i > 0 && board[i - 1][j] < 3 && boardOfMonsters[i - 1][j] == 0) {
                 left = (Math.abs(i - 1 - shape.i) + Math.abs(j - shape.j))
             } else {
                 left = 100000
             }
-            if (i < 14 && board[i + 1][j] < 2 && boardOfMonsters[i + 1][j] == 0) {
+            if (i < 14 && board[i + 1][j] < 3 && boardOfMonsters[i + 1][j] == 0) {
                 right = (Math.abs(i + 1 - shape.i) + Math.abs(j - shape.j))
             } else {
                 right = 100000
             }
-            if (j < 10 && board[i][j + 1] < 2 && boardOfMonsters[i][j + 1] == 0) {
+            if (j < 10 && board[i][j + 1] < 3 && boardOfMonsters[i][j + 1] == 0) {
                 down = (Math.abs(i - shape.i) + Math.abs(j + 1 - shape.j))
             } else {
                 down = 100000
             }
-            if (j > 0 && board[i][j - 1] < 2 && boardOfMonsters[i][j - 1] == 0) {
+            if (j > 0 && board[i][j - 1] < 3 && boardOfMonsters[i][j - 1] == 0) {
                 up = (Math.abs(i - shape.i) + Math.abs(j - 1 - shape.j))
             } else {
                 up = 100000
@@ -167,21 +169,29 @@ var right ;
 
             var min = Math.min(up, down, right, left);
 
-            if (min != 100000) {
-                if (min == left) {
+            if (min != 100000 && moved[boardOfMonsters[i][j]]===undefined) {
+                if (min == left ) {
                     boardOfMonsters[i - 1][j] = boardOfMonsters[i][j];
+                    if( board[i - 1][j]==2) LOST=true;
+                    moved[boardOfMonsters[i][j]]=true;
                     boardOfMonsters[i][j] = 0;
                 }
                 else if (min == right) {
                     boardOfMonsters[i + 1][j] = boardOfMonsters[i][j];
+                    if( board[i + 1][j]==2) LOST=true;
+                    moved[boardOfMonsters[i][j]]=true;
                     boardOfMonsters[i][j] = 0;
                 }
                 else if (min == up) {
                     boardOfMonsters[i][j - 1] = boardOfMonsters[i][j];
+                    if( board[i][j - 1]==2) LOST=true;
+                    moved[boardOfMonsters[i][j]]=true;
                     boardOfMonsters[i][j] = 0;
                 }
                 else if (min == down) {
                     boardOfMonsters[i][j + 1] = boardOfMonsters[i][j];
+                    if( board[i][j + 1]==2) LOST=true;
+                    moved[boardOfMonsters[i][j]]=true;
                     boardOfMonsters[i][j] = 0;
                 }
             }
@@ -327,10 +337,16 @@ function UpdatePosition() {
     {
         pac_color="green";
     }
-    if(score==500)
+    if(score==500 || LOST)
     {
+        var message;
         window.clearInterval(interval);
-        window.alert("Game completed");
+        if(score==500)
+         message ="Game completed";
+        else
+            message="You Lost";
+
+        window.alert(message);
     }
     else
     {
