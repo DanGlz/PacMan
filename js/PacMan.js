@@ -96,6 +96,7 @@ function Start() {
     setMonsters(3) ;
      BonusItem.i = 14 ;
      BonusItem.j = 10 ;
+     BonusItem.draw= true ;
      chooseRandomSpotForBonusItem() ;
     interval=setInterval(UpdatePosition, 60);
 }
@@ -341,7 +342,11 @@ function UpdatePosition() {
     {
         score+=25;
     }
-
+    if (shape.i == BonusItem.i && shape.j == BonusItem.j && BonusItem.draw )
+    {
+    BonusItem.draw= false ;
+     score+=50;
+    }
     board[shape.i][shape.j]=2;
     var currentTime=new Date();
     time_elapsed=(currentTime-start_time)/100;
@@ -357,11 +362,12 @@ function UpdatePosition() {
          message ="We have a Winner!!";
         else
             message="You Lost";
+
         window.alert(message);
     }
     else
     {
-        if (counter%15 == 0)
+        if (counter%25 == 0)
         {
             moveMonsters();
             moveBonusItem();
@@ -438,6 +444,7 @@ var nextJ = BonusItem.nextJ ;
     } else {
                     up = 100000
            }
+
    var min = Math.min(up, down, right, left);
         if (min == left)
         {
@@ -475,4 +482,4 @@ function chooseRandomSpotForBonusItem ()
        BonusItem.nextJ =j ;
 }
 
-window.addEventListener("load", Start, false);
+//window.addEventListener("load", Start, false);
