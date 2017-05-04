@@ -39,7 +39,7 @@ function Start() {
     score = 0;
     pac_color="yellow";
     var cnt = 165;
-    var food_remain = 120;
+    var food_remain = 90;
     numBalls_5_point = Math.floor(food_remain/0.6) ;
     numBalls_15_point = Math.floor(food_remain/0.3) ;
     numBalls_25_point = Math.floor(food_remain/0.1) ;
@@ -76,8 +76,18 @@ function Start() {
         board[emptyCell[0]][emptyCell[1]] = randomBalls();
         food_remain--;
     }
+
+
+
+
+
+
+
     keysDown = {}; // dictionary
     addEventListener("keydown", function (e) {
+        if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+            e.preventDefault();
+        }
         keysDown[e.keyCode] = true;
     }, false);
     addEventListener("keyup", function (e) {
@@ -252,19 +262,19 @@ function Draw() {
                 context.fill();
             } else if (board[i][j] == 1.05)
             {// the balls 5
-                context.drawImage(ball_5points,center.x-20, center.y-20,30,30);
+                context.drawImage(ball_5points,center.x-15, center.y-15,25,25);
             }
             else if (board[i][j] == 1.15)
             {
-                  context.drawImage(ball_15points,center.x-20, center.y-20,30,30);
+                  context.drawImage(ball_15points,center.x-15, center.y-15,25,25);
             }
              else if (board[i][j] == 1.25)
                   {
-                       context.drawImage(ball_25points,center.x-20, center.y-20,30,30);
+                       context.drawImage(ball_25points,center.x-15, center.y-15,25,25);
                   }
             else if (board[i][j] == 4) {//walls
                 context.beginPath();
-                context.rect(center.x-20, center.y-20, 40, 40);
+                context.rect(center.x-20, center.y-20, 40,40);
                 context.fillStyle = "grey"; //color
                 context.fill();
             }
@@ -331,6 +341,7 @@ function UpdatePosition() {
     {
         score+=25;
     }
+
     board[shape.i][shape.j]=2;
     var currentTime=new Date();
     time_elapsed=(currentTime-start_time)/100;
@@ -343,20 +354,22 @@ function UpdatePosition() {
         var message;
         window.clearInterval(interval);
         if(score==500)
-         message ="Game completed";
+         message ="We have a Winner!!";
         else
             message="You Lost";
-
         window.alert(message);
     }
     else
     {
-        if (counter%5 == 0)
+        if (counter%15 == 0)
         {
             moveMonsters();
             moveBonusItem();
         }
         Draw();
+        if(boardOfMonsters[shape.i][shape.j]>0){
+            LOST=true;
+        }
         counter ++ ;
     }
 }
@@ -425,7 +438,6 @@ var nextJ = BonusItem.nextJ ;
     } else {
                     up = 100000
            }
-alert ("sdaasda");
    var min = Math.min(up, down, right, left);
         if (min == left)
         {

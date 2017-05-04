@@ -145,4 +145,7 @@ function regClick() {
         document.getElementById("reg").style.display = "none";
         document.getElementById("log").style.display = "block";
     }
+
+
+
 }
