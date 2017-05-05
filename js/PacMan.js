@@ -19,6 +19,8 @@ var numBalls_15_point ;
 var numBalls_25_point ;
 var counter =0;
 var LOST = false;
+var lifeLaftForPlyer  ;
+var numberOfMonsters =3  ;
 
 monster1 = new Image() ;
 monster1.src= "images/monster2.png";
@@ -34,7 +36,10 @@ ball_25points= new Image() ;
 ball_25points.src="images/25points.png";
 BonusItemImage= new Image() ;
 BonusItemImage.src="images/bonusItem.png";
-
+heartImage= new Image() ;
+heartImage.src="images/heart.png";
+pacmanImage= new Image() ;
+pacmanImage.src="images/pacman.png";
 
 function setArray() {
     board= [
@@ -60,6 +65,8 @@ function setArray() {
 
 
 function Start() {
+
+   lifeLaftForPlyer= 3 ;
     LOST=false;
     window.clearInterval(interval);
     //board = new Array();
@@ -114,9 +121,9 @@ function Start() {
     addEventListener("keyup", function (e) {
         keysDown[e.keyCode] = false;
     }, false);
-    setMonsters(3) ;
-     BonusItem.i = 14 ;
-     BonusItem.j = 10 ;
+    setMonsters(numberOfMonsters) ;
+     BonusItem.i = 15 ;
+     BonusItem.j = 11 ;
      BonusItem.draw= true ;
      chooseRandomSpotForBonusItem() ;
     interval=setInterval(UpdatePosition, 60);
@@ -270,7 +277,7 @@ function Draw() {
     for (var i = 0; i < 17; i++) {  //15
         for (var j = 0; j < 13; j++) { //11
             var center = new Object();
-            center.x = i * 40 + 20; // i column
+            center.x = (i+2) * 40 + 20; // i column
             center.y = j * 40 + 20;// j rows
             if (board[i][j] == 2) {//pacman
                 context.strokeStyle= "black";
@@ -316,10 +323,14 @@ function Draw() {
             }
             if (BonusItem.draw)
             {
-            context.drawImage(BonusItemImage,BonusItem.i*40 ,BonusItem.j*40  ,40,40);
+            context.drawImage(BonusItemImage,(BonusItem.i+2)*40 ,BonusItem.j*40  ,40,40);
             }
+
         }
     }
+    drawHowMuchLifeLaft() ;
+
+
 }
 function UpdatePosition() {
     board[shape.i][shape.j]=0;
@@ -386,8 +397,12 @@ function UpdatePosition() {
         window.clearInterval(interval);
         if(score>500)
          message ="We have a Winner!!";
-        if(LOST)
+        if(LOST){
             message="You Lost!";
+            lifeLaftForPlyer--;
+        showLostMessage();
+}
+        //window.alert(message);
         if(time_elapsed>=gameDuration)
             message="The time is over!";
         window.alert(message);
@@ -447,25 +462,25 @@ var nextJ = BonusItem.nextJ ;
             chooseRandomSpotForBonusItem();
     }
 
-     if (i > 0 && board[i - 1][j] < 4 )
+     if (i > 1 && board[i - 1][j] < 4 )
      {
      left = (Math.abs(i - 1 - nextI) + Math.abs(j - nextJ))
      } else {
                  left = 100000
             }
-     if (i < 14 && board[i + 1][j] < 4 )
+     if (i < 15 && board[i + 1][j] < 4 )
      {
         right = (Math.abs(i + 1 - nextI) + Math.abs(j - nextJ))
      } else {
                     right = 100000
             }
-     if (j < 10 && board[i][j + 1] <4 )
+     if (j < 11 && board[i][j + 1] <4 )
      {
                     down = (Math.abs(i - nextI) + Math.abs(j + 1 - nextJ))
      } else {
                     down = 100000
             }
-    if (j > 0 && board[i][j - 1] < 4)
+    if (j > 1 && board[i][j - 1] < 4)
     {
             up = (Math.abs(i - nextI) + Math.abs(j - 1 - nextJ))
     } else {
@@ -544,3 +559,58 @@ function SettingsClick() {
 }
 
 //window.addEventListener("load", Start, false);
+function showLostMessage ()
+{
+ var modal = document.getElementById('youLostOneLife');
+ document.getElementById('numberOfLifeLeft').innerHTML = lifeLaftForPlyer;;
+if (lifeLaftForPlyer < 1 )
+{
+document.getElementById('ContinueButton').style.visibility = 'hidden';
+}
+else
+{
+document.getElementById('ContinueButton').style.visibility = 'visible';
+
+}
+   modal.style.display = "block";
+
+
+}
+function CloseLostMessage()
+{
+    var modal = document.getElementById('youLostOneLife');
+    modal.style.display = "none";
+}
+function StartFresh()
+{
+    var modal = document.getElementById('youLostOneLife');
+    modal.style.display = "none";
+    Start() ;
+}
+function continueGame ()
+{
+     var modal = document.getElementById('youLostOneLife');
+        modal.style.display = "none";
+        setMonsters(numberOfMonsters) ;
+            interval=setInterval(UpdatePosition, 60);
+            LOST=false ;
+
+
+}
+
+function drawHowMuchLifeLaft ()
+{
+   context.strokeStyle="#000000";
+   context.strokeRect(760,0,65,250);
+   context.drawImage(heartImage,770, 5,40,40);
+    context.beginPath();
+    context.moveTo(760, 50);
+    context.lineTo(825, 50);
+    context.stroke();
+    for (var i = 0 ; i<lifeLaftForPlyer ; i++)
+    {
+       context.drawImage(pacmanImage,770,80+(i*50),40,40);
+
+
+    }
+}
