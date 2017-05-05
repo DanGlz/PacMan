@@ -20,7 +20,7 @@ var numBalls_25_point ;
 var counter =0;
 var LOST = false;
 var lifeLaftForPlyer  ;
-var numberOfMonsters =3  ;
+var _numberOfMonsters =3  ;
 var medicine =new Object () ;
 
 monster1 = new Image() ;
@@ -128,7 +128,7 @@ function Start() {
     addEventListener("keyup", function (e) {
         keysDown[e.keyCode] = false;
     }, false);
-    setMonsters(numberOfMonsters) ;
+    setMonsters(_numberOfMonsters) ;
      BonusItem.i = 15 ;
      BonusItem.j = 11 ;
      BonusItem.draw= true ;
@@ -546,9 +546,9 @@ function SettingsClick() {
     {
         alert("The number of ball that you entered not in range!");
         return;
-    }else if(!gameTime.match(/\d+/g))
+    }else if(!numberOfBalls.match(/\d+/g))
     {
-        alert("Number of balls has to be a number !");
+        alert("The Number of balls not in range !");
         return;
     }
     else
@@ -561,6 +561,8 @@ function SettingsClick() {
     {
         alert("The min time have to be 1 minutes !");
         return;
+
+
     }else if(!gameTime.match(/\d+/g))
     {
         alert("Time has to be a number !");
@@ -571,6 +573,25 @@ function SettingsClick() {
         gameDuration = gameTime*60;
     }
 
+    var numberOfMonsters = document.getElementsByName("numberOfMonsters")[0].value;
+    if(numberOfMonsters < 1 || numberOfMonsters >3  )
+    {
+        alert("The number of monsters not in range !");
+        return;
+    }else if(!numberOfMonsters.match(/\d+/g))
+    {
+        alert("Number of monsters has to be a number !");
+        return;
+    }
+    else
+    {
+        _numberOfMonsters = numberOfMonsters;
+    }
+    closeSettings()
+    document.getElementsByName("numberOfBalls")[0].value =50;
+    document.getElementsByName("numberOfMonsters")[0].value=3;
+    document.getElementsByName("gameTime")[0].value=1;
+    openTab(event, 'PacMan');
 }
 
 //window.addEventListener("load", Start, false);
@@ -606,7 +627,7 @@ function continueGame ()
 {
      var modal = document.getElementById('youLostOneLife');
         modal.style.display = "none";
-        setMonsters(numberOfMonsters) ;
+        setMonsters(_numberOfMonsters) ;
             interval=setInterval(UpdatePosition, 60);
             LOST=false ;
 

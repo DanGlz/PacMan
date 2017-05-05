@@ -22,7 +22,7 @@ function logClick() {
                 +"\n\nEnjoy ! ")
 
             logged_user = username;
-        //   openTab(event, 'PacMan');
+
 
             /********settings******/
 
@@ -31,9 +31,6 @@ function logClick() {
             SettingsModal.style.display = "block";
             /*****end settings****/
             }
-
-
-
 
         else if(registered_users[username]===undefined){
             alert("The user <"+username+"> doesn`t exist! Please register first. " )
