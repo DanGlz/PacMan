@@ -15,20 +15,29 @@ function logClick() {
 
     var username = document.getElementsByName("logName")[0].value;
     var password = document.getElementsByName("logPassword")[0].value;
-
-
     registered_users.a="a";
-    var dan ="dan";
-    var pass= "12345"
-    registered_users[dan]= pass;
-
         if(registered_users[username]== password) {
-            alert("User: " + username + " logged in successfully!" + "\n\nEnjoy ! ")
+            alert("User: " + username + " logged in successfully!" +
+                "\n\nPlease set the settings for the game. "
+                +"\n\nEnjoy ! ")
+
             logged_user = username;
-            openTab(event, 'PacMan');
-        }
+        //   openTab(event, 'PacMan');
+
+            /********settings******/
+
+                // Get the modal
+            var SettingsModal = document.getElementById('myModalSettings');
+            SettingsModal.style.display = "block";
+            /*****end settings****/
+            }
+
+
+
+
         else if(registered_users[username]===undefined){
             alert("The user <"+username+"> doesn`t exist! Please register first. " )
+
         }
         else
             alert("Wrong password entered! please try again." )
@@ -36,6 +45,11 @@ function logClick() {
     return;
 }
 
+function closeSettings(){
+    var SettingsModal = document.getElementById('myModalSettings');
+    SettingsModal.style.display="none";
+
+}
 
 
 /*****About*****/
@@ -68,7 +82,9 @@ $(document).mouseup(function (e)
             modal.style.display = "none";
         }
     }
-});
+
+
+    });
 
 
 // draws welcome image when page opens

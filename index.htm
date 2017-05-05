@@ -15,7 +15,7 @@
 <body bgcolor="#E6E6FA">
 <header class="header">
           <img src="css/header.png" height="60" width="300" />
-         <div class="createdBy">Created by Dan Gleyzr & Nitzan Massad</div>
+         <div class="createdBy">Created by Dan Gleyzer & Nitzan Massad</div>
 </header>
 <aside>
     <nav class="navbar" role="navigation">
@@ -99,7 +99,6 @@
             <p>J query Plugin??</p><br>
             <p>Template?</p><br>
             <p><b>Difficulties?</b><br>
-
         </div>
     </div>
 </div>
@@ -107,11 +106,9 @@
 
 
 
-
-
-
-
-<div id="PacMan" class="tabcontent" align="center">
+<div id="PacMan" class="tabcontent" align="center" >
+<div id="PacMan1">
+    <div id="board" align="center">
     SCORE:
 <input id="lblScore" type="text" />
 <br/>
@@ -122,7 +119,40 @@ TIME:
     <button id = "start_button" onclick="Start()">
         Start
     </button>
+    </div>
 </div>
+</div>
+
+
+<!-- The Settings Modal -->
+<div id="myModalSettings" class="SettingsModal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="closeSettings()">x</span>
+            <h2 class="h2">Settings:</h2>
+        </div>
+    <div class="formholder" align="center">
+        <div class="randompad">
+            <fieldset>
+                <label>Choose number of balls(Range: 50-90 balls):</label>
+                <input name="numberOfBalls"  value="50" type="text" required minlength="1" required/>
+                <label>Game duration(Minimum duration : 1 min):</label>
+                <input name="gameTime" value="1" type="text" required min="2" required/>
+                <label>Number Of Monsters(Range: 1-3 Monsters):</label>
+                <input name="numberOfMonsters" value="3" type="text" required min="2" required/>
+                <input type="submit" value="Take me to the game!" name="SettingsSubmit" onclick="return SettingsClick()"/>
+            </fieldset>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
 
 
 <footer class="footer-basic-centered" id="det_footer">
