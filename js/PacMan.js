@@ -34,9 +34,35 @@ ball_25points.src="images/25points.png";
 BonusItemImage= new Image() ;
 BonusItemImage.src="images/bonusItem.png";
 
+
+function setArray() {
+    board= [
+        [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+        [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+        [4, 0, 4, 4, 4, 0, 0, 0, 4, 4, 4, 0, 4],
+        [4, 0, 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 4],
+        [4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4],
+        [4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4],
+        [4, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 4],
+        [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+        [4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4],
+        [4, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 4],
+        [4, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 4],
+        [4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4],
+        [4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4],
+        [4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4],
+        [4, 0, 4, 4, 4, 0, 0, 0, 4, 4, 4, 0, 4],
+        [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+        [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+    ];
+}
+
+
 function Start() {
     LOST=false;
-    board = new Array();
+    window.clearInterval(interval);
+    //board = new Array();
+    setArray();
     score = 0;
     pac_color="yellow";
     var cnt = 165;
@@ -47,13 +73,14 @@ function Start() {
     var pacman_remain = 1;
     start_time= new Date();
 
-    for (var i = 0; i < 15; i++) { // columns
-        board[i] = new Array();
+    for (var i = 1; i < 16; i++) { // columns
+       // board[i] = new Array();
         //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-        for (var j = 0; j < 11; j++) { // rows
-            if((i==3 && j==3)||(i==3 && j==4)||(i==3 && j==5)||(i==3 && j==5)||(i==6 && j==1)||(i==6 && j==2))
+        for (var j = 1; j < 12; j++) { // rows
+            //if((i==3 && j==3)||(i==3 && j==4)||(i==3 && j==5)||(i==3 && j==5)||(i==6 && j==1)||(i==6 && j==2))
+            if(board[i][j]=== 4)
             {
-                board[i][j] = 4;// wall
+               continue;// wall
             }
             else{
                 var randomNum = Math.random();
@@ -99,10 +126,10 @@ function setMonsters (numOfMonsters)
     {
     boardOfMonsters = new Array();
         var monsterId=1;
-     for (var i = 0; i < 15; i++) { // columns
+     for (var i = 0; i < 17; i++) { // columns
             boardOfMonsters[i] = [];
-            for (var j = 0; j < 11; j++) { // rows
-                if ( (i==0 && j == 0) || (i==14 && j == 0 && numOfMonsters>1) || (i==0 && j == 10 && numOfMonsters>2))
+            for (var j = 0; j < 13; j++) { // rows
+                if ( (i==1 && j == 1) || (i==15 && j == 1 && numOfMonsters>1) || (i==1 && j == 11 && numOfMonsters>2)) // instead one zero
                 {
                       boardOfMonsters[i][j] = monsterId ;
                         monsterId++;
@@ -116,12 +143,12 @@ function setMonsters (numOfMonsters)
 }
 
 function findRandomEmptyCell(board){
-    var i = Math.floor((Math.random() * 13) + 1);
-    var j = Math.floor((Math.random() * 9) + 1);
+    var i = Math.floor((Math.random() * 14) + 1);
+    var j = Math.floor((Math.random() * 10) + 1);
     while(board[i][j]!=0)
     {
-        i = Math.floor((Math.random() * 13) + 1);
-        j = Math.floor((Math.random() *9) + 1);
+        i = Math.floor((Math.random() * 14) + 1);
+        j = Math.floor((Math.random() *10) + 1);
     }
     return [i,j];
 }
@@ -148,26 +175,26 @@ var down ;
 var left ;
 var right ;
 var moved ={};
- for (var i = 0; i < 15; i++) { // columns
-        for (var j = 0; j < 11; j++) { // rows
+ for (var i = 1; i < 16; i++) { // columns
+        for (var j = 1; j < 12; j++) { // rows
 
         if (boardOfMonsters[i][j]>0) {
-            if (i > 0 && board[i - 1][j] < 3 && boardOfMonsters[i - 1][j] == 0) {
+            if (i > 1 && board[i - 1][j] < 3 && boardOfMonsters[i - 1][j] == 0) {  //instead on zero!
                 left = (Math.abs(i - 1 - shape.i) + Math.abs(j - shape.j))
             } else {
                 left = 100000
             }
-            if (i < 14 && board[i + 1][j] < 3 && boardOfMonsters[i + 1][j] == 0) {
+            if (i < 15 && board[i + 1][j] < 3 && boardOfMonsters[i + 1][j] == 0) {
                 right = (Math.abs(i + 1 - shape.i) + Math.abs(j - shape.j))
             } else {
                 right = 100000
             }
-            if (j < 10 && board[i][j + 1] < 3 && boardOfMonsters[i][j + 1] == 0) {
+            if (j < 11 && board[i][j + 1] < 3 && boardOfMonsters[i][j + 1] == 0) {
                 down = (Math.abs(i - shape.i) + Math.abs(j + 1 - shape.j))
             } else {
                 down = 100000
             }
-            if (j > 0 && board[i][j - 1] < 3 && boardOfMonsters[i][j - 1] == 0) {
+            if (j > 1 && board[i][j - 1] < 3 && boardOfMonsters[i][j - 1] == 0) {
                 up = (Math.abs(i - shape.i) + Math.abs(j - 1 - shape.j))
             } else {
                 up = 100000
@@ -240,8 +267,8 @@ function Draw() {
          pacmanEyeDrawX = 5 ;
          pacmanEyeDrawY = -15 ;
                           }
-    for (var i = 0; i < 15; i++) {
-        for (var j = 0; j < 11; j++) {
+    for (var i = 0; i < 17; i++) {  //15
+        for (var j = 0; j < 13; j++) { //11
             var center = new Object();
             center.x = i * 40 + 20; // i column
             center.y = j * 40 + 20;// j rows
@@ -257,19 +284,19 @@ function Draw() {
                 context.fill();
             } else if (board[i][j] == 1.05)
             {// the balls 5
-                context.drawImage(ball_5points,center.x-15, center.y-15,25,25);
+                context.drawImage(ball_5points,center.x-15, center.y-15,20,20);
             }
             else if (board[i][j] == 1.15)
             {
-                  context.drawImage(ball_15points,center.x-15, center.y-15,25,25);
+                  context.drawImage(ball_15points,center.x-15, center.y-15,20,20);
             }
              else if (board[i][j] == 1.25)
                   {
-                       context.drawImage(ball_25points,center.x-15, center.y-15,25,25);
+                       context.drawImage(ball_25points,center.x-15, center.y-15,20,20);
                   }
             else if (board[i][j] == 4) {//walls
                 context.beginPath();
-                context.rect(center.x-20, center.y-20, 40,40);
+                context.rect(center.x-20, center.y-20, 35,35);
                 context.fillStyle = "grey"; //color
                 context.fill();
             }
@@ -296,7 +323,7 @@ function UpdatePosition() {
     var x = GetKeyPressed()
     if(x==1)
     {
-        if(shape.j>0 && board[shape.i][shape.j-1]!=4)
+        if(shape.j>1 && board[shape.i][shape.j-1]!=4)
         {
             shape.j--;
             pacmanDirection= x ;
@@ -304,7 +331,7 @@ function UpdatePosition() {
     }
     if(x==2)
     {
-        if(shape.j<10 && board[shape.i][shape.j+1]!=4)
+        if(shape.j<11 && board[shape.i][shape.j+1]!=4)
         {
             shape.j++;
             pacmanDirection= x ;
@@ -312,7 +339,7 @@ function UpdatePosition() {
     }
     if(x==3)
     {
-        if(shape.i>0 && board[shape.i-1][shape.j]!=4)
+        if(shape.i>1 && board[shape.i-1][shape.j]!=4)
         {
             shape.i--;
             pacmanDirection= x ;
@@ -320,7 +347,7 @@ function UpdatePosition() {
     }
     if(x==4)
     {
-        if(shape.i<14 && board[shape.i+1][shape.j]!=4)
+        if(shape.i<15 && board[shape.i+1][shape.j]!=4)
         {
             shape.i++;
             pacmanDirection= x ;
@@ -354,10 +381,10 @@ function UpdatePosition() {
     {
         var message;
         window.clearInterval(interval);
-        if(score==500)
+        if(score>500)
          message ="We have a Winner!!";
-        else
-            message="You Lost";
+        if(LOST)
+            message="You Lost!";
 
         window.alert(message);
     }
