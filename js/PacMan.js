@@ -4,6 +4,7 @@
 var context = canvas.getContext("2d");
 var shape=new Object();
 var BonusItem=new Object();
+var main_sound;
 var board;
 var score;
 var pac_color;
@@ -71,6 +72,8 @@ function setArray() {
 
 function Start() {
 
+    main_sound = document.getElementById( "main_sound" );
+    main_sound.play();
     food_remain = 50 ;//need to delete
     medicine.show= true ;
     lifeLaftForPlyer= 3 ;
@@ -102,10 +105,12 @@ function Start() {
                     food_remain--;
                     board[i][j] = randomBalls(); // circles
                 } else if (randomNum < 1.0 * (pacman_remain + food_remain) / cnt) {
-                    shape.i=i;
-                    shape.j=j;
-                    pacman_remain--;
-                    board[i][j] = 2; // pacman
+                    if(i>2 && j>2&& i<14 &&j<11 ) {
+                        shape.i = i;
+                        shape.j = j;
+                        pacman_remain--;
+                        board[i][j] = 2; // pacman
+                    }
                 } else {
                     board[i][j] = 0;  //empty
                 }
@@ -113,11 +118,26 @@ function Start() {
             }
         }
     }
-    while(food_remain>0){
+
+    while(pacman_remain>0){
+        var emptyCell = findRandomEmptyCell(board);
+        var i=emptyCell[0];
+        var j=emptyCell[1];
+        if(i>2 && j>2&& i<14 &&j<11 ) {
+            board[emptyCell[0]][emptyCell[1]] = 2;
+            pacman_remain--;
+            shape.i = i;
+            shape.j = j;
+        }
+
+    }
+    while(food_remain>0 ){
         var emptyCell = findRandomEmptyCell(board);
         board[emptyCell[0]][emptyCell[1]] = randomBalls();
         food_remain--;
     }
+
+
     keysDown = {}; // dictionary
     addEventListener("keydown", function (e) {
         if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
@@ -673,6 +693,7 @@ function medicineShow ()
     if(medicine.show)
     {
         medicine.show= false ;
+        if(! medicine.i === undefined)
         board[ medicine.i][ medicine.j] = 0;
 
     }

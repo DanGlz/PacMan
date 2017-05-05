@@ -31,7 +31,7 @@
 
                         <button id = "About" class="tablinks">About</button>
 
-                        <button class="tablinks" onclick="openTab(event, 'PacMan')">PacMan</button>
+                      <!--  <button class="tablinks" onclick="openTab(event, 'PacMan')">PacMan</button> -->
 
                     </div>
                 </ul>
@@ -66,7 +66,6 @@
                 <label>D.O.B:</label>
                 <input type="date" name="dob" required/>
                 <input type="submit" value="Register" name="regSubmit" onclick="return regClick()"/>
-
             </fieldset>
         </div>
     </div>
@@ -168,11 +167,6 @@ TIME:
 
 
 
-
-
-
-
-
 <footer class="footer-basic-centered" id="det_footer">
 
     <p class="site-details" >Contact Us:  Dan Gleyzer : Dangleyzer@gmail.com  ,  Nitzan Massad: nitzanmassad@gmail.com </p>
@@ -180,6 +174,10 @@ TIME:
     <p class="site-details">PacMan Site </p>
 
 </footer>
+
+<audio id = "main_sound" preload = "auto">
+    <source src = "sounds/pacman_main.mp3" type = "audio/mpeg"/>
+</audio>
 
 </body>
 <!--script-->
