@@ -104,6 +104,23 @@
     </div>
 </div>
 
+<!-- The lost game window -->
+<div id="youLostOneLife" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="CloseLostMessage()" >x</span>
+            <h2 class="h2" align="center">You lost</h2>
+        </div>
+        <div class="modal-body">
+            <p align="center"> you have: </p><br>
+            <p id ="numberOfLifeLeft" align="center"></p><br>
+            <p align="center"><b>life left</b><br>
+           <button id="ContinueButton" onclick="continueGame()">Continue</button><br>
+           <button id="StartFreshButton" onclick="StartFresh()">Start fresh </button>
+        </div>
+    </div>
+</div>
 
 
 
@@ -118,7 +135,7 @@
 TIME:
 <input id="lblTime" type="text" />
 <br/>
-<canvas id="canvas" height="520" width="680"></canvas>
+<canvas id="canvas" height="520" width="900"></canvas>
     <button id = "start_button" onclick="Start()">
         Start
     </button>
@@ -127,7 +144,7 @@ TIME:
 
 <footer class="footer-basic-centered" id="det_footer">
 
-    <p class="site-details" >Contact Us:  Dan Gleyzer : Dangleyzer@gmail.com  ,  Nitzan Massad: blabla@gmail.com </p>
+    <p class="site-details" >Contact Us:  Dan Gleyzer : Dangleyzer@gmail.com  ,  Nitzan Massad: nitzanmassad@gmail.com </p>
 
     <p class="site-details">PacMan Site </p>
 

@@ -18,6 +18,8 @@ var numBalls_15_point ;
 var numBalls_25_point ;
 var counter =0;
 var LOST = false;
+var lifeLaftForPlyer  ;
+var numberOfMonsters =3  ;
 
 monster1 = new Image() ;
 monster1.src= "images/monster2.png";
@@ -59,6 +61,7 @@ function setArray() {
 
 
 function Start() {
+   lifeLaftForPlyer= 3 ;
     LOST=false;
     window.clearInterval(interval);
     //board = new Array();
@@ -114,7 +117,7 @@ function Start() {
     addEventListener("keyup", function (e) {
         keysDown[e.keyCode] = false;
     }, false);
-    setMonsters(3) ;
+    setMonsters(numberOfMonsters) ;
      BonusItem.i = 14 ;
      BonusItem.j = 10 ;
      BonusItem.draw= true ;
@@ -383,10 +386,12 @@ function UpdatePosition() {
         window.clearInterval(interval);
         if(score>500)
          message ="We have a Winner!!";
-        if(LOST)
+        if(LOST){
             message="You Lost!";
-
-        window.alert(message);
+            lifeLaftForPlyer--;
+        showLostMessage();
+}
+        //window.alert(message);
     }
     else
     {
@@ -506,3 +511,41 @@ function chooseRandomSpotForBonusItem ()
 }
 
 //window.addEventListener("load", Start, false);
+function showLostMessage ()
+{
+ var modal = document.getElementById('youLostOneLife');
+ document.getElementById('numberOfLifeLeft').innerHTML = lifeLaftForPlyer;;
+if (lifeLaftForPlyer < 1 )
+{
+document.getElementById('ContinueButton').style.visibility = 'hidden';
+}
+else
+{
+document.getElementById('ContinueButton').style.visibility = 'visible';
+
+}
+   modal.style.display = "block";
+
+
+}
+function CloseLostMessage()
+{
+    var modal = document.getElementById('youLostOneLife');
+    modal.style.display = "none";
+}
+function StartFresh()
+{
+    var modal = document.getElementById('youLostOneLife');
+    modal.style.display = "none";
+    Start() ;
+}
+function continueGame ()
+{
+     var modal = document.getElementById('youLostOneLife');
+        modal.style.display = "none";
+        setMonsters(numberOfMonsters) ;
+            interval=setInterval(UpdatePosition, 60);
+            LOST=false ;
+
+
+}
