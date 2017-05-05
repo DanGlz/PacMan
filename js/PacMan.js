@@ -20,6 +20,7 @@ var counter =0;
 var LOST = false;
 var lifeLaftForPlyer  ;
 var numberOfMonsters =3  ;
+var medicine =new Object () ;
 
 monster1 = new Image() ;
 monster1.src= "images/monster2.png";
@@ -39,6 +40,10 @@ heartImage= new Image() ;
 heartImage.src="images/heart.png";
 pacmanImage= new Image() ;
 pacmanImage.src="images/pacman.png";
+medicineImage= new Image() ;
+medicineImage.src="images/medicine.png";
+
+
 
 function setArray() {
     board= [
@@ -64,7 +69,7 @@ function setArray() {
 
 
 function Start() {
-
+    medicine.show= false ;
    lifeLaftForPlyer= 3 ;
     LOST=false;
     window.clearInterval(interval);
@@ -306,6 +311,9 @@ function Draw() {
                 context.rect(center.x-20, center.y-20, 35,35);
                 context.fillStyle = "grey"; //color
                 context.fill();
+            }else if (board[i][j] == 4 && medicine.show)
+            {
+             context.drawImage(ball_25points,center.x-15, center.y-15,20,20);
             }
             if (boardOfMonsters[i][j]==1 )
             {
@@ -407,6 +415,10 @@ function UpdatePosition() {
         {
             moveMonsters();
             moveBonusItem();
+            if (counter%200)
+            {
+                medicineShow() ;
+            }
         }
         Draw();
         if(boardOfMonsters[shape.i][shape.j]>0){
@@ -414,6 +426,7 @@ function UpdatePosition() {
         }
         counter ++ ;
     }
+
 }
 
 function randomBalls ()
@@ -570,7 +583,20 @@ function drawHowMuchLifeLaft ()
     for (var i = 0 ; i<lifeLaftForPlyer ; i++)
     {
        context.drawImage(pacmanImage,770,80+(i*50),40,40);
-
-
     }
+}
+
+function medicineShow ()
+{
+    if(medicine.show)
+    {
+        medicine.show= false ;
+    }
+    else
+    {
+          medicine.show= true ;
+          var emptyCell = findRandomEmptyCell(board);
+          board[emptyCell[0]][emptyCell[1]] = 3;
+    }
+
 }
