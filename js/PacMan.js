@@ -70,6 +70,8 @@ function setArray() {
 
 
 function Start() {
+
+    food_remain = 50 ;//need to delete
     medicine.show= false ;
    lifeLaftForPlyer= 3 ;
     LOST=false;
