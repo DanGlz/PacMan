@@ -9,8 +9,9 @@ var score;
 var pac_color;
 var start_time;
 var time_elapsed;
+var food_remain = 50;
 var interval;
-var interval2;
+var gameDuration=60;
 var pacmanDirection = 4;
 var boardOfMonsters ;
 var numBalls_5_point ;
@@ -56,11 +57,11 @@ function setArray() {
         [4, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 4],
         [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
         [4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4],
-        [4, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 4],
+        [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
         [4, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 4],
         [4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4],
         [4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4],
-        [4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4],
+        [4, 0, 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 4],
         [4, 0, 4, 4, 4, 0, 0, 0, 4, 4, 4, 0, 4],
         [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
         [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
@@ -78,7 +79,6 @@ function Start() {
     score = 0;
     pac_color="yellow";
     var cnt = 165;
-    var food_remain = 90;
     numBalls_5_point = Math.floor(food_remain/0.6) ;
     numBalls_15_point = Math.floor(food_remain/0.3) ;
     numBalls_25_point = Math.floor(food_remain/0.1) ;
@@ -285,11 +285,14 @@ function Draw() {
             center.x = (i+2) * 40 + 20; // i column
             center.y = j * 40 + 20;// j rows
             if (board[i][j] == 2) {//pacman
+                context.strokeStyle= "black";
+                context.lineWidth=1;
+                context.fillStyle = pac_color; //color
                 context.beginPath();
                 context.arc(center.x, center.y, 20, pacmanStartDraw * Math.PI, pacmanEndDraw * Math.PI); // half circle
                 context.lineTo(center.x, center.y);
-                context.fillStyle = pac_color; //color
                 context.fill();
+                context.stroke();
                 context.beginPath();
                 context.arc(center.x+pacmanEyeDrawX, center.y + pacmanEyeDrawY,2 , 0, 2 * Math.PI); // circle eye
                 context.fillStyle = "black"; //color
@@ -309,7 +312,7 @@ function Draw() {
             else if (board[i][j] == 4) {//walls
                 context.beginPath();
                 context.rect(center.x-20, center.y-20, 35,35);
-                context.fillStyle = "grey"; //color
+                context.fillStyle = "lightslategray"; //color
                 context.fill();
             }else if (board[i][j] == 4 && medicine.show)
             {
@@ -391,12 +394,12 @@ function UpdatePosition() {
     }
     board[shape.i][shape.j]=2;
     var currentTime=new Date();
-    time_elapsed=(currentTime-start_time)/100;
-    if(score>=20&&time_elapsed<=10)
+    time_elapsed=(currentTime-start_time)/1000;
+    if(score>=20&&time_elapsed<=1)
     {
         pac_color="green";
     }
-    if(score==500 || LOST)
+    if(score>500 || LOST || time_elapsed>=gameDuration)
     {
         var message;
         window.clearInterval(interval);
@@ -408,10 +411,13 @@ function UpdatePosition() {
         showLostMessage();
 }
         //window.alert(message);
+        if(time_elapsed>=gameDuration)
+            message="The time is over!";
+        window.alert(message);
     }
     else
     {
-        if (counter%5 == 0)
+        if (counter%4 == 0)
         {
             moveMonsters();
             moveBonusItem();
@@ -529,6 +535,40 @@ function chooseRandomSpotForBonusItem ()
 
        BonusItem.nextI =i ;
        BonusItem.nextJ =j ;
+}
+
+function SettingsClick() {
+
+    var numberOfBalls = document.getElementsByName("numberOfBalls")[0].value;
+    if(numberOfBalls < 50 || numberOfBalls> 90  )
+    {
+        alert("The number of ball that you entered not in range!");
+        return;
+    }else if(!gameTime.match(/\d+/g))
+    {
+        alert("Number of balls has to be a number !");
+        return;
+    }
+    else
+    {
+        food_remain = numberOfBalls;
+    }
+
+   var gameTime = document.getElementsByName("gameTime")[0].value;
+    if(gameTime < 1 )
+    {
+        alert("The min time have to be 1 minutes !");
+        return;
+    }else if(!gameTime.match(/\d+/g))
+    {
+        alert("Time has to be a number !");
+        return;
+    }
+    else
+    {
+        gameDuration = gameTime*60;
+    }
+
 }
 
 //window.addEventListener("load", Start, false);
