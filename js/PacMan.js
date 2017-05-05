@@ -363,7 +363,7 @@ function UpdatePosition() {
     }
     else
     {
-        if (counter%25 == 0)
+        if (counter%5 == 0)
         {
             moveMonsters();
             moveBonusItem();
