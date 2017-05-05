@@ -72,8 +72,8 @@ function setArray() {
 function Start() {
 
     food_remain = 50 ;//need to delete
-    medicine.show= false ;
-   lifeLaftForPlyer= 3 ;
+    medicine.show= true ;
+    lifeLaftForPlyer= 3 ;
     LOST=false;
     window.clearInterval(interval);
     //board = new Array();
@@ -316,9 +316,9 @@ function Draw() {
                 context.rect(center.x-20, center.y-20, 35,35);
                 context.fillStyle = "lightslategray"; //color
                 context.fill();
-            }else if (board[i][j] == 4 && medicine.show)
+            }else if (board[i][j] == 3 && medicine.show)
             {
-             context.drawImage(ball_25points,center.x-15, center.y-15,20,20);
+             context.drawImage(medicineImage,center.x-20, center.y-20,40,40);
             }
             if (boardOfMonsters[i][j]==1 )
             {
@@ -389,6 +389,10 @@ function UpdatePosition() {
     {
         score+=25;
     }
+    if (board[shape.i][shape.j]==3)
+    {
+        lifeLaftForPlyer++;
+    }
     if (shape.i == BonusItem.i && shape.j == BonusItem.j && BonusItem.draw )
     {
     BonusItem.draw= false ;
@@ -404,26 +408,32 @@ function UpdatePosition() {
     if(score>500 || LOST || time_elapsed>=gameDuration)
     {
         var message;
+        var win = false ;
         window.clearInterval(interval);
         if(score>500)
-         message ="We have a Winner!!";
-        if(LOST){
-            message="You Lost!";
+        {
+         message =["We have a Winner!!", "your score is",score,"Congratulations!"];
+         win = true ;
+        }else if(LOST){
+
             lifeLaftForPlyer--;
-        showLostMessage();
-}
-        //window.alert(message);
-        if(time_elapsed>=gameDuration)
-            message="The time is over!";
-        window.alert(message);
+            start_time= new Date();
+            message =["You lost!", "your score is "+score,"you have "+lifeLaftForPlyer+" life laft"];
+        }else if(time_elapsed>=gameDuration)
+        {
+         lifeLaftForPlyer--;
+        start_time= new Date();
+        message =["Time over !", "your score is "+score,"try again"];
+        }
+        showLostOrWinMessage(message , win );
     }
     else
     {
-        if (counter%4 == 0)
+        if (counter%24 == 0)
         {
             moveMonsters();
             moveBonusItem();
-            if (counter%200)
+            if (counter%90==0)
             {
                 medicineShow() ;
             }
@@ -574,19 +584,27 @@ function SettingsClick() {
 }
 
 //window.addEventListener("load", Start, false);
-function showLostMessage ()
+function showLostOrWinMessage (message, win)
 {
  var modal = document.getElementById('youLostOneLife');
- document.getElementById('numberOfLifeLeft').innerHTML = lifeLaftForPlyer;;
-if (lifeLaftForPlyer < 1 )
+// document.getElementById('numberOfLifeLeft').innerHTML = lifeLaftForPlyer;;
+if (win)
+{
+    document.getElementById('ContinueButton').style.visibility = 'hidden';
+   document.getElementById('headLineFormessage').innerHTML = message[0];
+   document.getElementById('firstLine').innerHTML = message[1];
+   document.getElementById('secondLine').innerHTML = message[2];
+}else if (lifeLaftForPlyer < 1 )
 {
 document.getElementById('ContinueButton').style.visibility = 'hidden';
 }
 else
 {
 document.getElementById('ContinueButton').style.visibility = 'visible';
-
 }
+ document.getElementById('headLineFormessage').innerHTML = message[0];
+   document.getElementById('firstLine').innerHTML = message[1];
+   document.getElementById('secondLine').innerHTML = message[2];
    modal.style.display = "block";
 
 
@@ -616,7 +634,7 @@ function continueGame ()
 function drawHowMuchLifeLaft ()
 {
    context.strokeStyle="#000000";
-   context.strokeRect(760,0,65,250);
+   context.strokeRect(760,0,65,290);
    context.drawImage(heartImage,770, 5,40,40);
     context.beginPath();
     context.moveTo(760, 50);
@@ -630,15 +648,23 @@ function drawHowMuchLifeLaft ()
 
 function medicineShow ()
 {
+
     if(medicine.show)
     {
         medicine.show= false ;
+        board[ medicine.i][ medicine.j] = 0;
+
     }
     else
+    {
+    if (lifeLaftForPlyer<4)
     {
           medicine.show= true ;
           var emptyCell = findRandomEmptyCell(board);
           board[emptyCell[0]][emptyCell[1]] = 3;
+          medicine.i = emptyCell[0] ;
+          medicine.j = emptyCell[1] ;
+    }
     }
 
 }
