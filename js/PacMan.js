@@ -423,7 +423,7 @@ function UpdatePosition() {
         {
          lifeLaftForPlyer--;
         start_time= new Date();
-        message =["Time over !", "your score is "+score,"try again"];
+        message =["You can do better", "your score is "+score,"try again"];
         }
         showLostOrWinMessage(message , win );
     }
@@ -652,6 +652,7 @@ function medicineShow ()
     if(medicine.show)
     {
         medicine.show= false ;
+    if (!(medicine.i === undefined))
         board[ medicine.i][ medicine.j] = 0;
 
     }
