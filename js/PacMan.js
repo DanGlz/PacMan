@@ -20,7 +20,7 @@ var numBalls_25_point ;
 var counter =0;
 var LOST = false;
 var lifeLaftForPlyer  ;
-var numberOfMonsters =3  ;
+var _numberOfMonsters =3  ;
 var medicine =new Object () ;
 
 monster1 = new Image() ;
@@ -423,7 +423,7 @@ function UpdatePosition() {
         {
          lifeLaftForPlyer--;
         start_time= new Date();
-        message =["You can do better", "your score is "+score,"try again"];
+        message =["Time over !", "your score is "+score,"try again"];
         }
         showLostOrWinMessage(message , win );
     }
@@ -652,7 +652,6 @@ function medicineShow ()
     if(medicine.show)
     {
         medicine.show= false ;
-    if (!(medicine.i === undefined))
         board[ medicine.i][ medicine.j] = 0;
 
     }
