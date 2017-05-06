@@ -10,7 +10,8 @@ var score;
 var pac_color;
 var start_time;
 var time_elapsed;
-var food_remain = 50;
+var _selectedFood;
+var food_remain;
 var interval;
 var gameDuration=60;
 var pacmanDirection = 4;
@@ -74,11 +75,15 @@ function Start() {
 
     main_sound = document.getElementById( "main_sound" );
     main_sound.play();
+<<<<<<< HEAD
 
    var div123 = document.getElementById('PacMan');
     div123.innerHTML = div123.innerHTML + 'Extra stuff';
 
     food_remain = 50 ;//need to delete
+=======
+    food_remain = _selectedFood ;//need to delete
+>>>>>>> 09f22eb3da5d4d6301659218bbc622c88bf966a3
     medicine.show= true ;
     medicine.firstIoop = true ;
     lifeLaftForPlyer= 3 ;
@@ -465,7 +470,7 @@ function UpdatePosition() {
     }
     else
     {
-        if (counter%24 == 0)
+        if (counter%5 == 0)
         {
             moveMonsters();
             moveBonusItem();
@@ -600,7 +605,8 @@ function SettingsClick() {
     }
     else
     {
-        food_remain = numberOfBalls;
+        _selectedFood=numberOfBalls;
+
     }
 
    var gameTime = document.getElementsByName("gameTime")[0].value;
@@ -683,7 +689,7 @@ function continueGame ()
      var modal = document.getElementById('youLostOneLife');
         modal.style.display = "none";
         setMonsters(_numberOfMonsters) ;
-            interval=setInterval(UpdatePosition, 60);
+            interval=setInterval(UpdatePosition, 80);
             LOST=false ;
 
 
