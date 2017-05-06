@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:color="http://www.w3.org/1999/xhtml">
 
 <head>
     <link rel="stylesheet" href="css/stylesheet.css">
@@ -12,7 +12,7 @@
         </head>
 
 
-<body bgcolor="#E6E6FA">
+<body ><!-- background="https://media.giphy.com/media/hzxD01hHwd2RG/giphy.gif">-->
 <header class="header">
           <img src="css/header.png" height="60" width="300" />
          <div class="createdBy">Created by Dan Gleyzer & Nitzan Massad</div>
@@ -31,7 +31,7 @@
 
                         <button id = "About" class="tablinks">About</button>
 
-                      <!--  <button class="tablinks" onclick="openTab(event, 'PacMan')">PacMan</button> -->
+                       <!--<button class="tablinks" onclick="openTab(event, 'PacMan')">PacMan</button>-->
 
                     </div>
                 </ul>
@@ -42,7 +42,7 @@
 
 <div id="Welcome" class="tabcontent" align="center" >
     <canvas id="myCanvas" height="450" width="900" style="border:0.5px solid">
-        <img src="css/background.jpg" id="bkgdImg" align="center"/>
+       <!-- <img src="css/background.jpg" id="bkgdImg" align="center"/>-->
     </canvas>
 </div>
 
@@ -123,21 +123,21 @@
 
 
 
-<div id="PacMan" class="tabcontent" align="center" >
-<div id="PacMan1">
-    <div id="board" align="center">
-    SCORE:
+<div id="PacMan" class="tabcontent" align="center" style="border:1px solid white;" >
+<div id="PacMan1" style="border:1px solid white;">
+    <div id="board" style="color:white" align="center" style="border:1px solid white;" >
+ SCORE:
 <input id="lblScore" type="text" />
 
 TIME:
-<input id="lblTime" type="text" />
+<input id="lblTime" type="text"  />
+        <button id = "start_button" onclick="Start()">
+New Game
+    </button>
     <br/>
 <br/>
-<canvas id="canvas" height="520" width="830"style="border:1px solid #d3d3d3;"></canvas>
+<canvas id="canvas" height="520" width="830"></canvas>
 
-    <button id = "start_button" onclick="Start()">
-        Start
-    </button>
     </div>
 </div>
 </div>
@@ -160,7 +160,7 @@ TIME:
                 <input name="gameTime" value="1" type="text" required min="1" required/>
                 <label>Number Of Monsters(Range: 1-3 Monsters):</label>
                 <input name="numberOfMonsters" value="3" type="text" required min="1" required/>
-                <input type="submit" value="Take me to the game!" name="SettingsSubmit" onclick="return SettingsClick()"/>
+                <input type="submit" value="Take me to the game!" name="SettingsSubmit" onclick="SettingsClick()"/>
             </fieldset>
         </div>
     </div>
