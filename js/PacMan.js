@@ -75,7 +75,7 @@ function Start() {
 
     main_sound = document.getElementById( "main_sound" );
    // main_sound.play();
-
+    location.href = "#board";
     food_remain = _selectedFood ;//need to delete
     medicine.show= true ;
     medicine.firstIoop = true ;
