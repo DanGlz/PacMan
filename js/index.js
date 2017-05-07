@@ -98,6 +98,8 @@ function openTab(evt, divName) {
     var i, tabcontent, tablinks;
 
     document.getElementById("det_footer").style.position ="fixed";
+    window.clearInterval(interval);
+    canvas.width=canvas.width; //clean board
 
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
