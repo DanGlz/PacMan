@@ -74,7 +74,7 @@ function setArray() {
 function Start() {
 
     main_sound = document.getElementById( "main_sound" );
-   // main_sound.play();
+   main_sound.play();
     location.href = "#board";
     food_remain = _selectedFood ;//need to delete
     medicine.show= true ;
@@ -438,24 +438,24 @@ function UpdatePosition() {
         var message;
         var win = false ;
         window.clearInterval(interval);
-        if(score>500)
+        if(score>=500)
         {
-         message =["We have a Winner!!", "your score is",score,"Congratulations!"];
+         message =["We have a Winner!!", "Your score is: ",score,"Congratulations!"];
          win = true ;
         }else if(LOST){
 
             lifeLaftForPlyer--;
             start_time= new Date();
-            message =["You lost!", "your score is "+score,"you have "+lifeLaftForPlyer+" life laft"];
+            message =["You lost!", "Your score is: "+score,"you have "+lifeLaftForPlyer+" life left"];
         }else if(time_elapsed>=gameDuration)
                {
                  lifeLaftForPlyer--;
                  start_time= new Date();
                  if (score < 150)
                  {
-                     message =["Time over !","you can do better", "your score is "+score];
+                     message =["Time over !","You can do better", "Your score is :"+score];
                  }else {
-                             message =["Time over !","we hava a winner", "your score is "+score];
+                             message =["Time over !","We have a Winner", "Your score is: "+score];
                  }
                }
         showLostOrWinMessage(message , win );
@@ -655,19 +655,20 @@ if (win)
    document.getElementById('headLineFormessage').innerHTML = message[0];
    document.getElementById('firstLine').innerHTML = message[1];
    document.getElementById('secondLine').innerHTML = message[2];
-}else if (lifeLaftForPlyer < 1 )
+}else if (lifeLaftForPlyer < 1 ) // LOST
 {
 document.getElementById('ContinueButton').style.visibility = 'hidden';
 }
 else
 {
 document.getElementById('ContinueButton').style.visibility = 'visible';
-}
+   }
  document.getElementById('headLineFormessage').innerHTML = message[0];
    document.getElementById('firstLine').innerHTML = message[1];
    document.getElementById('secondLine').innerHTML = message[2];
+   main_sound.pause();
+    main_sound.currentTime=0;
    modal.style.display = "block";
-
 
 }
 function CloseLostMessage()
@@ -688,6 +689,8 @@ function continueGame ()
         setMonsters(_numberOfMonsters) ;
         start_time= new Date();
         LOST=false ;
+        main_sound=document.getElementById( "main_sound" );
+        main_sound.play();
         interval=setInterval(UpdatePosition, 80);
 
 

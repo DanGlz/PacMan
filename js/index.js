@@ -83,7 +83,7 @@ $(document).mouseup(function (e)
 
 
 // draws welcome image when page opens
-window.onload = function() {
+window.ready = function() {
     document.getElementById("det_footer").focus();
     var c=document.getElementById('myCanvas');
     var ctx=c.getContext("2d");
