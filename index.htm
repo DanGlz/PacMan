@@ -121,32 +121,31 @@
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" onclick="CloseLostMessage()" >x</span>
-            <h2 class="h2" align="center"id="headLineFormessage">You lost</h2>
+            <h2 class="h2" align="center"id="headLineFormessage"></h2>
         </div>
         <div class="modal-body" align="center">
             <p id ="firstLine" align="center"></p><br>
             <p id="secondLine" align="center"></p><br>
-           <button id="ContinueButton" onclick="continueGame()" >Continue</button><br>
-           <button id="StartFreshButton" onclick="StartFresh()">Start fresh </button>
-            <div class="formholder" align="center">
-            </div>
+           <button id="ContinueButton"class="buttonRest" onclick="continueGame()" >Continue</button><br>
+           <button id="StartFreshButton" class="buttonRest" onclick="StartFresh()">Start fresh </button>
+
         </div>
     </div>
 </div>
 
 
 
-<div id="PacMan" class="tabcontent" align="center" style="border:1px solid white;" >
+<div id="PacMan" class="tabcontent" align="center" <!--style="border:1px solid white;"--> >
 
 <div id="PacMan1" style="border:1px solid white;">
-    <div id="board" style="color:white" align="center" style="border:1px solid white;" >
+    <div id="board" style="color:white" align="center"> <!--style="border:1px solid white;" -->
  <input id="nameOfUser" type="text" style="background:transparent; border:transparent; color:white; font-size:22px;  font-family:Comic Sans MS; width:20% "/>
         SCORE:
 <input id="lblScore" type="text" />
 
 TIME:
 <input id="lblTime" type="text"  />
-        <button id = "start_button" onclick="Start()">
+        <button id = "start_button" class="buttonRest" onclick="Start()">
 New Game
     </button>
     <br/>

@@ -266,3 +266,18 @@ div.tab button.active {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
+
+.buttonRest  {
+                background:yellow;
+                   padding: 7px 5px;
+                   margin: 1px 0;
+                   width: 80%;
+
+                   font-size: 18px;
+                   border-radius: 5px;
+                   border: none;
+                   -webkit-transition: 0.3s linear;
+                   -moz-transition: 0.3s linear;
+                   -o-transition: 0.3s linear;
+                   transition: 0.3s linear;
+            }
