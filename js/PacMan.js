@@ -94,7 +94,6 @@ function Start() {
     var pacman_remain = 1;
     start_time= new Date();
 
-
     for (var i = 1; i < 16; i++) { // columns
        // board[i] = new Array();
         //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -158,9 +157,7 @@ function Start() {
      BonusItem.j = 11 ;
      BonusItem.draw= true ;
      chooseRandomSpotForBonusItem() ;
-
     interval=setInterval(UpdatePosition, 60);
-    window.alert("dffs");
 }
 
 function setMonsters (numOfMonsters)
@@ -304,13 +301,13 @@ function Draw() {
              pacmanStartDraw = 1.15 ;
              pacmanEndDraw = 0.85 ;
              pacmanEyeDrawX = -5 ;
-        if (pacmanDirection == 4 ){//right
-            pacmanStartDraw = 0.15 ;
-            pacmanEndDraw = 1.85 ;
-            pacmanEyeDrawX = 5 ;
-            pacmanEyeDrawY = -15
-            pacmanEyeDrawY = -15 ;
-    };
+             pacmanEyeDrawY = -15 ;
+    }
+    if (pacmanDirection == 4 ){//right
+         pacmanStartDraw = 0.15 ;
+         pacmanEndDraw = 1.85 ;
+         pacmanEyeDrawX = 5 ;
+         pacmanEyeDrawY = -15 ;
                           }
     for (var i = 0; i < 17; i++) {  //15
         for (var j = 0; j < 13; j++) { //11
@@ -351,7 +348,6 @@ function Draw() {
             {
              context.drawImage(medicineImage,center.x-20, center.y-20,40,40);
             }
-
             if (boardOfMonsters[i][j]==1 )
             {
                 context.drawImage(monster1,center.x-20, center.y-20,40,40);
