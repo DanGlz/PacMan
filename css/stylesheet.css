@@ -266,7 +266,7 @@ div.tab button.active {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
+/* the butoon in the pacman tab*/
 .buttonRest  {
                 background:yellow;
                    padding: 7px 5px;
@@ -281,6 +281,7 @@ div.tab button.active {
                    -o-transition: 0.3s linear;
                    transition: 0.3s linear;
             }
+/* the butoons in the welcome tab*/
 .welcomeButton {
                     background:yellow;
                    padding: 50px 50px;

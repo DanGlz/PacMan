@@ -216,21 +216,23 @@ var moved ={};
         for (var j = 1; j < 12; j++) { // rows
 
         if (boardOfMonsters[i][j]>0) {
+             if (j < 11 && board[i][j + 1] < 3 && boardOfMonsters[i][j + 1] == 0) {
+                   down = (Math.abs(i - shape.i) + Math.abs(j + 1 - shape.j))
+             } else {
+                   down = 100000
+             }
             if (i > 1 && board[i - 1][j] < 3 && boardOfMonsters[i - 1][j] == 0) {  //instead on zero!
                 left = (Math.abs(i - 1 - shape.i) + Math.abs(j - shape.j))
             } else {
                 left = 100000
             }
+
             if (i < 15 && board[i + 1][j] < 3 && boardOfMonsters[i + 1][j] == 0) {
                 right = (Math.abs(i + 1 - shape.i) + Math.abs(j - shape.j))
             } else {
                 right = 100000
             }
-            if (j < 11 && board[i][j + 1] < 3 && boardOfMonsters[i][j + 1] == 0) {
-                down = (Math.abs(i - shape.i) + Math.abs(j + 1 - shape.j))
-            } else {
-                down = 100000
-            }
+
             if (j > 1 && board[i][j - 1] < 3 && boardOfMonsters[i][j - 1] == 0) {
                 up = (Math.abs(i - shape.i) + Math.abs(j - 1 - shape.j))
             } else {
@@ -449,13 +451,15 @@ function UpdatePosition() {
             message =["You lost!", "your score is "+score,"you have "+lifeLaftForPlyer+" life laft"];
         }else if(time_elapsed>=gameDuration)
                {
+               // this will prevent from the contino button to apper
+               win = true ;
                  lifeLaftForPlyer--;
                  start_time= new Date();
                  if (score < 150)
                  {
                      message =["Time over !","you can do better", "your score is "+score];
                  }else {
-                             message =["Time over !","we hava a winner", "your score is "+score];
+                        message =["Time over !","we hava a winner", "your score is "+score];
                  }
                }
         showLostOrWinMessage(message , win );
