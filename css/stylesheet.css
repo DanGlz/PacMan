@@ -27,13 +27,13 @@ div.tab {
     vertical-align: center ;
     overflow: hidden;
     border: 0px solid transparent;
-    background-color: white;
+
 }
 
 /* Style the buttons inside the tab */
 div.tab button {
-    background: black;
-    color: white ;
+    background: white;
+    color: black ;
     font-family: "Comic Sans MS", cursive, sans-serif ;
     border: black;
     outline: transparent;
@@ -245,9 +245,10 @@ div.tab button.active {
 /* board and menu*/
 
 #PacMan1{
-    border:1px solid red;
+
     margin-right:5px;
     display:inline-block;
+
 }
 
 /**** settings block ***/
@@ -264,4 +265,4 @@ div.tab button.active {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}l
+}

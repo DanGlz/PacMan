@@ -17,9 +17,6 @@ function logClick() {
     var password = document.getElementsByName("logPassword")[0].value;
     registered_users.a="a";
         if(registered_users[username]== password) {
-            alert("User: " + username + " logged in successfully!" +
-                "\n\nPlease set the settings for the game. "
-                +"\n\nEnjoy ! ")
 
             logged_user = username;
 
@@ -31,7 +28,6 @@ function logClick() {
             SettingsModal.style.display = "block";
             /*****end settings****/
             }
-
         else if(registered_users[username]===undefined){
             alert("The user <"+username+"> doesn`t exist! Please register first. " )
 
