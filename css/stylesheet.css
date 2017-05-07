@@ -271,11 +271,12 @@ div.tab button.active {
                 background:yellow;
                    padding: 7px 5px;
                    margin: 1px 0;
-                   width: 80%;
-
+                   width: 70%;
+                    border: white;
+;
                    font-size: 18px;
                    border-radius: 5px;
-                   border: none;
+
                    -webkit-transition: 0.3s linear;
                    -moz-transition: 0.3s linear;
                    -o-transition: 0.3s linear;
@@ -287,10 +288,9 @@ div.tab button.active {
                    padding: 50px 50px;
                    margin: 10px 10px;
                    width: 30%;
-
+                    border: white;
                    font-size: 30px;
                    border-radius: 5px;
-                   border: none;
                    -webkit-transition: 0.3s linear;
                    -moz-transition: 0.3s linear;
                    -o-transition: 0.3s linear;
