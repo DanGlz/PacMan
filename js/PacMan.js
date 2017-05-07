@@ -242,9 +242,9 @@ var moved ={};
             var min = Math.min(up, down, right, left);
 
             if (min != 100000 && moved[boardOfMonsters[i][j]]===undefined) {
-                if (min == left ) {
-                    boardOfMonsters[i - 1][j] = boardOfMonsters[i][j];
-                    if( board[i - 1][j]==2) LOST=true;
+                if (min == up) {
+                    boardOfMonsters[i][j - 1] = boardOfMonsters[i][j];
+                    if( board[i][j - 1]==2) LOST=true;
                     moved[boardOfMonsters[i][j]]=true;
                     boardOfMonsters[i][j] = 0;
                 }
@@ -254,12 +254,12 @@ var moved ={};
                     moved[boardOfMonsters[i][j]]=true;
                     boardOfMonsters[i][j] = 0;
                 }
-                else if (min == up) {
-                    boardOfMonsters[i][j - 1] = boardOfMonsters[i][j];
-                    if( board[i][j - 1]==2) LOST=true;
+                else  if (min == left ) {
+                    boardOfMonsters[i - 1][j] = boardOfMonsters[i][j];
+                    if( board[i - 1][j]==2) LOST=true;
                     moved[boardOfMonsters[i][j]]=true;
                     boardOfMonsters[i][j] = 0;
-                }
+                                     }
                 else if (min == down) {
                     boardOfMonsters[i][j + 1] = boardOfMonsters[i][j];
                     if( board[i][j + 1]==2) LOST=true;
