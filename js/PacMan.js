@@ -74,9 +74,8 @@ function setArray() {
 function Start() {
 
     main_sound = document.getElementById( "main_sound" );
-    main_sound.play();
-   var div123 = document.getElementById('PacMan');
-    div123.innerHTML = div123.innerHTML + 'Extra stuff';
+   // main_sound.play();
+
     food_remain = _selectedFood ;//need to delete
     medicine.show= true ;
     medicine.firstIoop = true ;
@@ -280,6 +279,7 @@ function Draw() {
     context.fill();
     lblScore.value = score;
     lblTime.value = time_elapsed;
+
     var pacmanStartDraw ;
     var pacmanEndDraw ;
     var pacmanEyeDrawX ;
@@ -448,14 +448,16 @@ function UpdatePosition() {
             start_time= new Date();
             message =["You lost!", "your score is "+score,"you have "+lifeLaftForPlyer+" life laft"];
         }else if(time_elapsed>=gameDuration)
-        {
-         lifeLaftForPlyer--;
-        start_time= new Date();
-        if (score < 150)
-        message =["Time over !","you can do better", "your score is "+score];
-        }else {
-         message =["Time over !","we hava a winner", "your score is "+score];
-        }
+               {
+                 lifeLaftForPlyer--;
+                 start_time= new Date();
+                 if (score < 150)
+                 {
+                     message =["Time over !","you can do better", "your score is "+score];
+                 }else {
+                             message =["Time over !","we hava a winner", "your score is "+score];
+                 }
+               }
         showLostOrWinMessage(message , win );
     }
     else
@@ -583,6 +585,7 @@ function chooseRandomSpotForBonusItem ()
 
 function SettingsClick() {
 
+     document.getElementById("nameOfUser").value = "welcome "+logged_user;
     var numberOfBalls = document.getElementsByName("numberOfBalls")[0].value;
     if(numberOfBalls < 50 || numberOfBalls> 90  )
     {
@@ -679,8 +682,10 @@ function continueGame ()
      var modal = document.getElementById('youLostOneLife');
         modal.style.display = "none";
         setMonsters(_numberOfMonsters) ;
-            interval=setInterval(UpdatePosition, 80);
-            LOST=false ;
+        start_time= new Date();
+        LOST=false ;
+        interval=setInterval(UpdatePosition, 80);
+
 
 
 }

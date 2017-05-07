@@ -12,7 +12,6 @@ $('#Welcome').show();
 
 // check the user name and password on log in form
 function logClick() {
-
     var username = document.getElementsByName("logName")[0].value;
     var password = document.getElementsByName("logPassword")[0].value;
     registered_users.a="a";
@@ -21,6 +20,9 @@ function logClick() {
             logged_user = username;
 
 
+
+
+            //nameOfUser = logged_user ;
             /********settings******/
 
                 // Get the modal
