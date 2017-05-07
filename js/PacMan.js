@@ -75,8 +75,17 @@ function Start() {
 
     main_sound = document.getElementById( "main_sound" );
     main_sound.play();
+<<<<<<< HEAD
+
+   var div123 = document.getElementById('PacMan');
+    div123.innerHTML = div123.innerHTML + 'Extra stuff';
+
+    food_remain = 50 ;//need to delete
+=======
     food_remain = _selectedFood ;//need to delete
+>>>>>>> 09f22eb3da5d4d6301659218bbc622c88bf966a3
     medicine.show= true ;
+    medicine.firstIoop = true ;
     lifeLaftForPlyer= 3 ;
     LOST=false;
     window.clearInterval(interval);
@@ -90,6 +99,7 @@ function Start() {
     numBalls_25_point = Math.floor(food_remain/0.1) ;
     var pacman_remain = 1;
     start_time= new Date();
+
 
     for (var i = 1; i < 16; i++) { // columns
        // board[i] = new Array();
@@ -154,7 +164,9 @@ function Start() {
      BonusItem.j = 11 ;
      BonusItem.draw= true ;
      chooseRandomSpotForBonusItem() ;
+
     interval=setInterval(UpdatePosition, 60);
+    window.alert("dffs");
 }
 
 function setMonsters (numOfMonsters)
@@ -271,6 +283,10 @@ var moved ={};
 
 function Draw() {
     canvas.width=canvas.width; //clean board
+    context.beginPath();
+    context.rect(0, 0, 830, 520);
+    context.fillStyle = "#D3D3D3";
+    context.fill();
     lblScore.value = score;
     lblTime.value = time_elapsed;
     var pacmanStartDraw ;
@@ -337,10 +353,11 @@ function Draw() {
                 context.rect(center.x-20, center.y-20, 35,35);
                 context.fillStyle = "lightslategray"; //color
                 context.fill();
-            }else if (board[i][j] == 3 && medicine.show)
+            }else if (board[i][j] == 3)
             {
              context.drawImage(medicineImage,center.x-20, center.y-20,40,40);
             }
+
             if (boardOfMonsters[i][j]==1 )
             {
                 context.drawImage(monster1,center.x-20, center.y-20,40,40);
@@ -444,7 +461,10 @@ function UpdatePosition() {
         {
          lifeLaftForPlyer--;
         start_time= new Date();
-        message =["Time over !", "your score is "+score,"try again"];
+        if (score < 150)
+        message =["Time over !","you can do better", "your score is "+score];
+        }else {
+         message =["Time over !","we hava a winner", "your score is "+score];
         }
         showLostOrWinMessage(message , win );
     }
@@ -454,10 +474,11 @@ function UpdatePosition() {
         {
             moveMonsters();
             moveBonusItem();
-            if (counter%90==0)
-            {
-                medicineShow() ;
-            }
+
+        }
+        if (counter%90==0)
+        {
+                         ShowMedicine() ;
         }
         Draw();
         if(boardOfMonsters[shape.i][shape.j]>0){
@@ -689,26 +710,27 @@ function drawHowMuchLifeLaft ()
     }
 }
 
-function medicineShow ()
+function ShowMedicine ()
 {
 
     if(medicine.show)
     {
         medicine.show= false ;
-        if(! medicine.i === undefined)
-        board[ medicine.i][ medicine.j] = 0;
+        if( !medicine.firstIoop){
 
+             board[ medicine.i][ medicine.j] = 0;
+        }
+        medicine.firstIoop= false ;
     }
-    else
-    {
-    if (lifeLaftForPlyer<4)
+    else if (lifeLaftForPlyer<4)
     {
           medicine.show= true ;
           var emptyCell = findRandomEmptyCell(board);
-          board[emptyCell[0]][emptyCell[1]] = 3;
           medicine.i = emptyCell[0] ;
           medicine.j = emptyCell[1] ;
+          board[ medicine.i ][medicine.j] = 3;
+
     }
-    }
+
 
 }
