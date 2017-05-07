@@ -459,6 +459,7 @@ function UpdatePosition() {
                  {
                      message =["Time over !","You can do better", "Your score is :"+score];
                  }else {
+
                              message =["Time over !","We have a Winner", "Your score is: "+score];
                  }
                }
@@ -595,7 +596,7 @@ function SettingsClick() {
     {
         alert("The number of ball that you entered not in range!");
         return;
-    }else if(!numberOfBalls.match(/\d+/g))
+    }else if(!$.isNumeric(numberOfBalls))
     {
         alert("The Number of balls not in range !");
         return;
@@ -613,7 +614,8 @@ function SettingsClick() {
         return;
 
 
-    }else if(!gameTime.match(/\d+/g))
+        var a =$.isNumeric(gameTime);
+    }else if(!$.isNumeric(gameTime))
     {
         alert("Time has to be a number !");
         return;
@@ -628,7 +630,7 @@ function SettingsClick() {
     {
         alert("The number of monsters not in range !");
         return;
-    }else if(!numberOfMonsters.match(/\d+/g))
+    }else if(!$.isNumeric(numberOfMonsters))
     {
         alert("Number of monsters has to be a number !");
         return;

@@ -99,6 +99,9 @@ function openTab(evt, divName) {
 
     document.getElementById("det_footer").style.position ="fixed";
     window.clearInterval(interval);
+    main_sound = document.getElementById( "main_sound" );
+    main_sound.pause();
+    main_sound.currentTime=0;
     canvas.width=canvas.width; //clean board
 
     tabcontent = document.getElementsByClassName("tabcontent");
