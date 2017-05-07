@@ -637,7 +637,11 @@ function SettingsClick() {
     document.getElementsByName("numberOfBalls")[0].value =50;
     document.getElementsByName("numberOfMonsters")[0].value=3;
     document.getElementsByName("gameTime")[0].value=1;
+
     openTab(event, 'PacMan');
+    //document.getElementById("det_footer").style.display="none";
+      document.getElementById("det_footer").style.position ="relative";
+
 }
 
 //window.addEventListener("load", Start, false);

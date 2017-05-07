@@ -96,6 +96,9 @@ window.onload = function() {
 /***Tabs***/
 function openTab(evt, divName) {
     var i, tabcontent, tablinks;
+    window.alert("sdfs");
+    document.getElementById("det_footer").style.position ="fixed";
+
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
@@ -106,6 +109,8 @@ function openTab(evt, divName) {
     }
     document.getElementById(divName).style.display = "block";
     evt.currentTarget.className += " active";
+
+
 }
 function regClick() {
     var username = document.getElementsByName('regName')[0].value;

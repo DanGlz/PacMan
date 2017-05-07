@@ -191,9 +191,9 @@ div.tab button.active {
     text-align: center;
     font: normal 18px sans-serif;
     padding: 5px;
-    bottom: 1px;
-    position: relative;
-    z-index: -1;
+    bottom: 0px;
+    position: fixed;
+    z-index: 0;
 }
 
 .footer-basic-centered .site-details{
@@ -281,3 +281,23 @@ div.tab button.active {
                    -o-transition: 0.3s linear;
                    transition: 0.3s linear;
             }
+.welcomeButton {
+                    background:yellow;
+                   padding: 50px 50px;
+                   margin: 10px 10px;
+                   width: 30%;
+
+                   font-size: 30px;
+                   border-radius: 5px;
+                   border: none;
+                   -webkit-transition: 0.3s linear;
+                   -moz-transition: 0.3s linear;
+                   -o-transition: 0.3s linear;
+                   transition: 0.3s linear;
+            }
+
+
+
+
+
+

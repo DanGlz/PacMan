@@ -41,9 +41,10 @@
 </aside>
 
 <div id="Welcome" class="tabcontent" align="center" >
-    <canvas id="myCanvas" height="450" width="900" style="border:0.5px solid">
-       <!-- <img src="css/background.jpg" id="bkgdImg" align="center"/>-->
-    </canvas>
+    <button class="welcomeButton" onclick="openTab(event, 'Register')">Register</button>
+<br/>
+    <button class="welcomeButton" onclick="openTab(event, 'Login')">Login</button>
+
 </div>
 
 <div id="Register" class="tabcontent" align="center">
@@ -66,9 +67,12 @@
                 <label>D.O.B:</label>
                 <input type="date" name="dob" required/>
                 <input type="submit" value="Register" name="regSubmit" onclick="return regClick()"/>
+
             </fieldset>
         </div>
     </div>
+    <br/>
+    <br/>
 </div>
 
 <div id="Login" class="tabcontent" align="center">
@@ -154,6 +158,7 @@ New Game
 
     </div>
 </div>
+
 </div>
 
 
