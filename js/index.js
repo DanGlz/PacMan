@@ -96,7 +96,7 @@ window.onload = function() {
 /***Tabs***/
 function openTab(evt, divName) {
     var i, tabcontent, tablinks;
-    window.alert("sdfs");
+
     document.getElementById("det_footer").style.position ="fixed";
 
     tabcontent = document.getElementsByClassName("tabcontent");
