@@ -24,7 +24,7 @@ var LOST = false;
 var lifeLaftForPlyer  ;
 var _numberOfMonsters =3  ;
 var medicine =new Object () ;
-
+var Level= 5;
 monster1 = new Image() ;
 monster1.src= "images/monster2.png";
 monster2 = new Image() ;
@@ -348,7 +348,7 @@ function Draw() {
                 context.fill();
             }else if (board[i][j] == 3)
             {
-             context.drawImage(medicineImage,center.x-20, center.y-20,40,40);
+             context.drawImage(medicineImage,center.x-20, center.y-20,30,30);
             }
             if (boardOfMonsters[i][j]==1 )
             {
@@ -363,7 +363,7 @@ function Draw() {
             }
             if (BonusItem.draw)
             {
-            context.drawImage(BonusItemImage,(BonusItem.i+2)*40 ,BonusItem.j*40  ,40,40);
+            context.drawImage(BonusItemImage,(BonusItem.i+2)*40 ,BonusItem.j*40  ,35,35);
             }
 
         }
@@ -467,15 +467,16 @@ function UpdatePosition() {
     }
     else
     {
-        if (counter%5 == 0)
+        if (counter%Level == 0)
         {
             moveMonsters();
+        }
+        if(counter%4==0){
             moveBonusItem();
-
         }
         if (counter%90==0)
         {
-                         ShowMedicine() ;
+            ShowMedicine() ;
         }
         Draw();
         if(boardOfMonsters[shape.i][shape.j]>0){
@@ -639,6 +640,15 @@ function SettingsClick() {
     {
         _numberOfMonsters = numberOfMonsters;
     }
+    var e = document.getElementById("SelectedLevel");
+
+    var StringLevel = e.options[e.selectedIndex].value;
+    if(StringLevel=="Easy")
+        Level=9;
+    if(StringLevel=="Medium")
+        Level=5;
+    if(StringLevel=="Hard")
+        Level=3;
     closeSettings()
     document.getElementsByName("numberOfBalls")[0].value =50;
     document.getElementsByName("numberOfMonsters")[0].value=3;
@@ -697,7 +707,7 @@ function continueGame ()
         LOST=false ;
         main_sound=document.getElementById( "main_sound" );
         main_sound.play();
-        interval=setInterval(UpdatePosition, 80);
+        interval=setInterval(UpdatePosition, 100);
 
 
 

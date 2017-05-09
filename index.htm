@@ -23,11 +23,11 @@
             <div class="menu-list">
                 <ul id="menu-content" class="menu-content collapse out">
                     <div class="tab">
-                        <button class="tablinks" onclick="openTab(event, 'Welcome')" >Welcome</button>
+                        <button   id="welcomeButton" class="tablinks" onclick="openTab(event, 'Welcome')" >Welcome</button>
 
-                        <button class="tablinks" onclick="openTab(event, 'Register')">Register</button>
+                        <button id="regButton" class="tablinks" onclick="openTab(event, 'Register')">Register</button>
 
-                        <button class="tablinks" onclick="openTab(event, 'Login')">Login</button>
+                        <button id="loginButton" class="tablinks" onclick="openTab(event, 'Login')">Login</button>
 
                         <button id = "About" class="tablinks">About</button>
 
@@ -48,8 +48,7 @@
 </div>
 
 <div id="Register" class="tabcontent" align="center">
-    <div class="arrow-up"></div>
-    <form class="formholder" action="mailto:dangleyzer@egmail.com" method="post" enctype="text/plain">
+    <form   class="formholder" action="mailto:dangleyzer@egmail.com" method="post" enctype="text/plain">
         <div class="randompad">
             <fieldset id="reg_fields">
                 <label>User Name:</label>
@@ -70,11 +69,10 @@
 
             </fieldset>
         </div>
-    <form/>
     <br/>
     <br/>
+ </form>
 </div>
-
 <div id="Login" class="tabcontent" align="center">
     <div class="formholder">
         <div class="randompad">
@@ -185,6 +183,12 @@ Click to Start a New Game
                 <input name="gameTime" value="1" type="text" required min="1" required/>
                 <label>Number Of Monsters(Range: 1-3 Monsters):</label>
                 <input name="numberOfMonsters" value="3" type="text" required min="1" required/>
+                <label>Level: </label>
+                <select id="SelectedLevel">
+                    <option value="Easy">Easy</option>
+                    <option value="Medium" selected="selected">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
                 <input type="submit" value="Take me to the game!" name="SettingsSubmit" onclick="SettingsClick()"/>
             </fieldset>
         </div>

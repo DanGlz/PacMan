@@ -163,8 +163,10 @@ function regClick() {
         document.getElementsByName('dob')[0].value = "";
         document.getElementsByName("logName")[0].value = "";
         document.getElementsByName("logPassword")[0].value = "";
-        document.getElementById("reg").style.display = "none";
-        document.getElementById("log").style.display = "block";
+        document.getElementById("Register").style.display = "none";
+        $('#loginButton').click();
+        openTab(event, 'Login')
+
     }
 
 
